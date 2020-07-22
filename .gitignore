@@ -3,7 +3,7 @@
 ###################
 *.com
 *.class
-*.dll
+# *.dll
 *.exe
 *.pdb
 *.dll.config
@@ -21,7 +21,7 @@ _UpgradeReport_Files/
 ###############
 # Directories #
 ###############
-bin/
+# bin/
 obj/
 TestResults/
 .vs
