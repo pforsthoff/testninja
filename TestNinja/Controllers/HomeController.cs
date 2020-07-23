@@ -20,6 +20,7 @@ namespace TestNinja.Controllers
 
         public IActionResult Index()
         {
+            //Default
             return View();
         }
 
