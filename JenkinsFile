@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+    stages {
+        
+        stage('Build') {
+            steps {
+                sh 'echo "Building dotnet app"'
+                sh '''
+                    dotnet build
+                '''
+            }
+        }
+        stage('Test: Unit Test'){
+            steps {
+            sh "dotnet test Tests/TestNinja.UnitTests/TestNinja.UnitTests.csproj"
+     }
+  }
+  
+    }
+}
