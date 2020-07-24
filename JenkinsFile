@@ -1,4 +1,8 @@
 pipeline {
+environment {
+    registry = "https://hub.docker.com/repository/docker/pforsthoff/pforsthoff"
+    registryCredential = 'dockerhub'
+  }
     agent any
     stages {
         
@@ -15,6 +19,12 @@ pipeline {
             sh "dotnet test Tests/TestNinja.UnitTests/TestNinja.UnitTests.csproj"
      }
   }
-  
+        stage('Push image') {
+        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+        app.push("${env.BUILD_NUMBER}")
+        app.push("latest")
+}
+}
+
     }
 }
