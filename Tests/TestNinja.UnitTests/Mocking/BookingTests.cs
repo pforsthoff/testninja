@@ -107,7 +107,7 @@ namespace TestNinja.UnitTests.Mocking
                 Status = "Cancelled",
             }, _bookingRepository.Object);
 
-            Assert.That(result, Is.EqualTo(_existingBooking.Reference));
+            Assert.That(result, Is.Empty);
         }
         private DateTime Before(DateTime dateTime, int days = 1)
         {
