@@ -19,22 +19,22 @@ environment {
             sh "dotnet test Tests/TestNinja.UnitTests/TestNinja.UnitTests.csproj"
      }
   }
-#        stage('Building image') {
-#          steps{
-#            script {
-#              dockerImage = docker.build registry + ":$BUILD_NUMBER"
-#            }
-#          }
-#        }
-#        stage('Deploy Image') {
-#          steps{
-#            script {
-#              docker.withRegistry( '', registryCredential ) {
-#                dockerImage.push()
-#              }
-#            }
-#         }
-#        }
+//        stage('Building image') {
+//          steps{
+//            script {
+//              dockerImage = docker.build registry + ":$BUILD_NUMBER"
+//            }
+//          }
+//        }
+//        stage('Deploy Image') {
+//          steps{
+//            script {
+//              docker.withRegistry( '', registryCredential ) {
+//                dockerImage.push()
+//              }
+//            }
+//         }
+//        }
         stage('Deploy to Tanzu') {
           steps{
             withCredentials([[$class            :   'UsernamePasswordMultiBinding',
@@ -46,10 +46,10 @@ environment {
             }
          }
         }
-#        stage('Remove Unused docker image') {
-#          steps{
-#            sh "docker rmi $registry:$BUILD_NUMBER"
-#          }
-#        }
+//        stage('Remove Unused docker image') {
+//          steps{
+//            sh "docker rmi $registry:$BUILD_NUMBER"
+//          }
+//        }
     }
 }
