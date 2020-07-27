@@ -19,26 +19,37 @@ environment {
             sh "dotnet test Tests/TestNinja.UnitTests/TestNinja.UnitTests.csproj"
      }
   }
-        stage('Building image') {
+#        stage('Building image') {
+#          steps{
+#            script {
+#              dockerImage = docker.build registry + ":$BUILD_NUMBER"
+#            }
+#          }
+#        }
+#        stage('Deploy Image') {
+#          steps{
+#            script {
+#              docker.withRegistry( '', registryCredential ) {
+#                dockerImage.push()
+#              }
+#            }
+#         }
+#        }
+        stage('Deploy to Tanzu') {
           steps{
-            script {
-              dockerImage = docker.build registry + ":$BUILD_NUMBER"
-            }
-          }
-        }
-        stage('Deploy Image') {
-          steps{
-            script {
-              docker.withRegistry( '', registryCredential ) {
-                dockerImage.push()
-              }
+            withCredentials([[$class            :   'UsernamePasswordMultiBinding',
+                              credentialsId     :   'PCF_LOGIN',
+                              usernameVariable  :   'paul.forsthoff@dell.com',
+                              passwordVariable  :   'ZAQ!2wsx']]) {
+                              sh 'cf login -a http://api.run.pivotal.io -u $USERNAME -p $PASSWORD'
+                              sh 'cf push'
             }
          }
         }
-        stage('Remove Unused docker image') {
-          steps{
-            sh "docker rmi $registry:$BUILD_NUMBER"
-          }
-        }
+#        stage('Remove Unused docker image') {
+#          steps{
+#            sh "docker rmi $registry:$BUILD_NUMBER"
+#          }
+#        }
     }
 }
