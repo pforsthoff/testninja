@@ -3,5 +3,5 @@ applications:
 - name: testninja
   memory: 512M
   instances: 1
-  path: /TestNinja/bin/Release/netcoreapp3.1/publish
+  path: TestNinja/bin/Release/netcoreapp3.1/publish
   buildpack: dotnet_core_buildpack
