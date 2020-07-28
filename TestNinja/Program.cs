@@ -16,6 +16,7 @@ namespace TestNinja
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.AddCloudFoundry();
                     webBuilder.AddConfigServer();
                     webBuilder.UseStartup<Startup>();
                 });
