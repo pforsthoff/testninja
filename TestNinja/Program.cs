@@ -1,11 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Steeltoe.Extensions.Configuration.CloudFoundry;
 
 namespace TestNinja
 {
@@ -20,6 +15,7 @@ namespace TestNinja
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.AddCloudFoundry();
                     webBuilder.UseStartup<Startup>();
                 });
     }
