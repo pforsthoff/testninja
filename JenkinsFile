@@ -20,11 +20,11 @@ environment {
 //                sh 'dotnet sonarscanner end /d:sonar.login="514a7ddcd04c721f93d424e0f77ff0752d0629bf"'
 //            }
 //        }
-        stage('Test: Unit Test'){
-            steps {
-            sh "dotnet test Tests/TestNinja.UnitTests/TestNinja.UnitTests.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=opencover"
-     }
-  }
+//        stage('Test: Unit Test'){
+//            steps {
+//            sh "dotnet test Tests/TestNinja.UnitTests/TestNinja.UnitTests.csproj --no-build --collect "Code Coverage""
+//     }
+//  }
 //        stage('Building image') {
 //          steps{
 //            script {
@@ -41,21 +41,41 @@ environment {
 //            }
 //         }
 //        }
-        stage('Deploy to Tanzu') {
-          steps{
-            withCredentials([[$class            :   'UsernamePasswordMultiBinding',
-                              credentialsId     :   'PCF_LOGIN',
-                              usernameVariable  :   'USERNAME',
-                              passwordVariable  :   'PASSWORD']]) {
-                              sh 'cf login -a http://api.run.pivotal.io -u $USERNAME -p $PASSWORD'
-                              sh 'cf push'
-            }
-         }
-        }
+//        stage('Deploy to Tanzu') {
+//          steps{
+//            withCredentials([[$class            :   'UsernamePasswordMultiBinding',
+//                              credentialsId     :   'PCF_LOGIN',
+//                              usernameVariable  :   'USERNAME',
+//                              passwordVariable  :   'PASSWORD']]) {
+//                              sh 'cf login -a http://api.run.pivotal.io -u $USERNAME -p $PASSWORD'
+//                              sh 'cf push'
+//            }
+//         }
+//        }
 //        stage('Remove Unused docker image') {
 //          steps{
 //            sh "docker rmi $registry:$BUILD_NUMBER"
 //          }
 //        }
+stage ('Run unit tests') {
+    steps {
+        powershell "dotnet test -c:Release /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --no-build --no-restore --logger trx"
+    }
+    post {
+        always {
+            step([$class: 'MSTestPublisher'])
+            publishCoverage failUnhealthy: true, 
+                globalThresholds: [[thresholdTarget: 'Package', unhealthyThreshold: 50.0]],
+                adapters: [coberturaAdapter(
+                    mergeToOneReport: true, 
+                    path: '**/*.cobertura.xml')]
+            script {
+                if (currentBuild.result == 'FAILURE') {
+                    error("Test coverage is too low.")
+                }
+            }
+        }
+    }
+}
     }
 }
