@@ -59,11 +59,11 @@ environment {
 //        }
 stage ('Run unit tests') {
     steps {
-        powershell "dotnet test -c:Release /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --no-build --no-restore --logger \"trx;LogFileName=unit_tests.xml\""
+        powershell "dotnet test -c:Release /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --no-build --no-restore --logger \"trx;LogFileName=unit.testresults\""
     }
     post {
         always {
-            step([$class: 'MSTestPublisher', testResultsFile:"**/unit_tests.xml", failOnError: true, keepLongStdio: true])
+            step([$class: 'MSTestPublisher', testResultsFile:"**/*.testresults", failOnError: true, keepLongStdio: true])
             script {
                 if (currentBuild.result == 'FAILURE') {
                     error("Test coverage is too low.")
