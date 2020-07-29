@@ -68,7 +68,7 @@ stage ('Run unit tests') {
                 globalThresholds: [[thresholdTarget: 'Package', unhealthyThreshold: 50.0]],
                 adapters: [coberturaAdapter(
                     mergeToOneReport: true, 
-                    path: '**/*.cobertura.xml')]
+                    path: '**/*.coverage.xml')]
             script {
                 if (currentBuild.result == 'FAILURE') {
                     error("Test coverage is too low.")
