@@ -59,7 +59,7 @@ environment {
 //        }
 stage ('Run unit tests') {
     steps {
-        powershell "dotnet test -c:Release /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --no-build --no-restore --logger \"trx;LogFileName=unit.testresults\""
+        sh "dotnet test -c:Release /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --no-build --no-restore --logger \"trx;LogFileName=unit.testresults\""
     }
     post {
         always {
