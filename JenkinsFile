@@ -16,7 +16,7 @@ environment {
         }
         stage('SonarQube Code Analysis') {
             steps {
-                sh 'export PATH="$PATH:/root/.dotnet/tools"'
+                sh 'export PATH="$PATH:/home/bitnami/.dotnet/tools"'
                 sh 'dotnet sonarscanner begin /k:"letmein" /d:sonar.host.url="http://192.168.1.215" /d:sonar.login="514a7ddcd04c721f93d424e0f77ff0752d0629bf"'
                 sh 'dotnet sonarscanner end /d:sonar.login="514a7ddcd04c721f93d424e0f77ff0752d0629bf"'
             }
