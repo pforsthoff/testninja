@@ -34,7 +34,7 @@ environment {
                 '/d:sonar.login="e5a371653e755fe90ab5ac03f2ad11ea01c50033" ' +
                 '/d:sonar.cs.opencover.reportsPaths=TestNinja.UnitTests/coverage.opencover.xml ' +
                 '/d:sonar.coverage.exclusions="**Test*.cs"'
-                sh "dotnet test Tests/TestNinja.UnitTests/TestNinja.UnitTests.csproj " +
+                sh "dotnet test --no-build Tests/TestNinja.UnitTests/TestNinja.UnitTests.csproj " +
                     "/p:CollectCoverage=true /p:CoverletOutputFormat=opencover"
                 sh 'dotnet sonarscanner end /d:sonar.login="e5a371653e755fe90ab5ac03f2ad11ea01c50033"'
             }
