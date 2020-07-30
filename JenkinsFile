@@ -19,7 +19,7 @@ environment {
 //                sh 'echo "Building dotnet app"'
 //                    dotnet build
 //            }
-        }
+//        }
          stage('Test: Run Nunit Unit Tests'){
             steps {
             sh "dotnet test Tests/TestNinja.UnitTests/TestNinja.UnitTests.csproj " +
