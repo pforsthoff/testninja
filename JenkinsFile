@@ -33,7 +33,7 @@ environment {
                 sh 'dotnet sonarscanner begin /k:"letmein" /d:sonar.host.url="http://192.168.1.215" \n
                 /d:sonar.login="e5a371653e755fe90ab5ac03f2ad11ea01c50033" \n
                 /d:sonar.cs.opencover.reportsPaths=TestNinja.UnitTests/coverage.opencover.xml  \n
-                /d:sonar.coverage.exclusions=”**Test*.cs”'
+                /d:sonar.coverage.exclusions="**Test*.cs"'
                 sh 'dotnet build'
                 sh 'dotnet sonarscanner end /d:sonar.login="e5a371653e755fe90ab5ac03f2ad11ea01c50033"'
             }
