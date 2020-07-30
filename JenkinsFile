@@ -30,7 +30,7 @@ environment {
             steps {
                 sh 'dotnet sonarscanner begin /k:"letmein" /d:sonar.host.url="http://192.168.1.215" ' +
                 '/d:sonar.login="e5a371653e755fe90ab5ac03f2ad11ea01c50033" ' +
-                '/d:sonar.cs.opencover.reportsPaths=TestNinja.UnitTests/TestResults/*/coverage.opencover.xml' +
+                '/d:sonar.cs.opencover.reportsPaths=TestNinja.UnitTests/TestResults/coverage.opencover.xml' +
                 '/d:sonar.coverage.exclusions="**UnitTests*.cs"'
                 sh 'dotnet build'
                 sh 'dotnet sonarscanner end /d:sonar.login="e5a371653e755fe90ab5ac03f2ad11ea01c50033"'
