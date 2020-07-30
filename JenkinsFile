@@ -24,7 +24,7 @@ environment {
         }
          stage('Test: Run Nunit Unit Tests'){
             steps {
-            sh "dotnet test Tests/TestNinja.UnitTests/TestNinja.UnitTests.csproj --no-build /p:CollectCoverage=true \
+            sh "dotnet test Tests/TestNinja.UnitTests/TestNinja.UnitTests.csproj --no-build /p:CollectCoverage=true 
                  /p:CoverletOutputFormat=opencover""
      }
   }
