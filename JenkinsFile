@@ -36,7 +36,7 @@ environment {
                 '/d:sonar.coverage.exclusions="**Test*.cs"'
                 sh "dotnet test Tests/TestNinja.UnitTests/TestNinja.UnitTests.csproj " +
                     "/p:CollectCoverage=true /p:CoverletOutputFormat=opencover"
-                sh 'dotnet sonarscanner end /d:sonar.login="e5a371653e755fe90ab5ac03f2ad11ea01c50033"'
+                sh 'dotnet sonarscanner end /d:sonar.verbose=true /d:sonar.login="e5a371653e755fe90ab5ac03f2ad11ea01c50033"'
             }
         }
 //        stage('Build Docker image') {
