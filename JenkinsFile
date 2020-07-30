@@ -34,7 +34,7 @@ environment {
                     '/d:sonar.coverage.exclusions="**Tests*.cs"'
 
                  sh "dotnet test Tests/TestNinja.UnitTests/TestNinja.UnitTests.csproj " +
-                    "--settings coverlet.runsettings --logger trx"
+                    "/p:CollectCoverage=true /p:CoverletOutputFormat=opencover"
 
                 sh 'dotnet sonarscanner end /d:sonar.login="e5a371653e755fe90ab5ac03f2ad11ea01c50033"'
             }
