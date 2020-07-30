@@ -5,7 +5,7 @@ environment {
   }
     agent any
     stages {
-        stage('Checkout') {
+        stage('Checkout Code from Github Repo') {
             steps {
                  git( 
                      credentialsId: '65bf30a5-bbe7-4cd3-aa2a-fb69509a4f19', 
@@ -14,8 +14,7 @@ environment {
                      )
                  }
   }
-
-        stage('Build') {
+        stage('Build (dotnet build)') {
             steps {
                 sh 'echo "Building dotnet app"'
                 sh '''
@@ -23,26 +22,29 @@ environment {
                 '''
             }
         }
-        stage('SonarQube Code Analysis') {
+         stage('Test: Run Nunit Unit Tests'){
             steps {
-                sh 'dotnet sonarscanner begin /k:"letmein" /d:sonar.host.url="http://192.168.1.215" /d:sonar.login="e5a371653e755fe90ab5ac03f2ad11ea01c50033"'
+            sh "dotnet test Tests/TestNinja.UnitTests/TestNinja.UnitTests.csproj --no-build /p:CollectCoverage=true \
+                 /p:CoverletOutputFormat=opencover""
+     }
+  }
+        stage('SonarQube Code Analysis and Coverage') {
+            steps {
+                sh 'dotnet sonarscanner begin /k:"letmein" /d:sonar.host.url="http://192.168.1.215" 
+                /d:sonar.login="e5a371653e755fe90ab5ac03f2ad11ea01c50033" /d:sonar.cs.opencover.reportsPaths=TestNinja.UnitTests/coverage.opencover.xml \
+                /d:sonar.coverage.exclusions=”**Test*.cs”'
                 sh 'dotnet build'
                 sh 'dotnet sonarscanner end /d:sonar.login="e5a371653e755fe90ab5ac03f2ad11ea01c50033"'
             }
         }
-//        stage('Test: Unit Test'){
-//            steps {
-//            sh "dotnet test Tests/TestNinja.UnitTests/TestNinja.UnitTests.csproj --no-build --collect "Code Coverage""
-//     }
-//  }
-//        stage('Building image') {
+//        stage('Build Docker image') {
 //          steps{
 //            script {
 //              dockerImage = docker.build registry + ":$BUILD_NUMBER"
 //            }
 //          }
 //        }
-//        stage('Deploy Image') {
+//        stage('Deploy To Docker') {
 //          steps{
 //            script {
 //              docker.withRegistry( '', registryCredential ) {
@@ -67,10 +69,10 @@ environment {
 //            sh "docker rmi $registry:$BUILD_NUMBER"
 //          }
 //        }
-        stage ('Save unit test results') {
-            steps {
-                sh "dotnet test --logger \"trx;LogFileName=unit_tests.trx\""
-            }
-        }
+//        stage ('Save unit test results') {
+//           steps {
+//                sh "dotnet test --logger \"trx;LogFileName=unit_tests.trx\""
+//            }
+//        }
    }
 }
