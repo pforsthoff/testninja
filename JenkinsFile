@@ -14,12 +14,14 @@ environment {
                      )
                  }
   }
-//        stage('Build (dotnet build)') {
-//            steps {
-//                sh 'echo "Building dotnet app"'
-//                    dotnet build
-//            }
-//        }
+        stage('Build (dotnet build)') {
+            steps {
+                sh 'echo "Building dotnet app"'
+                sh '''
+                    dotnet build
+                '''
+            }
+        }
          stage('Test: Run Nunit Unit Tests'){
             steps {
             sh "dotnet test Tests/TestNinja.UnitTests/TestNinja.UnitTests.csproj " +
@@ -30,10 +32,9 @@ environment {
             steps {
                 sh 'dotnet sonarscanner begin /k:"letmein" /d:sonar.host.url="http://192.168.1.215" ' +
                 '/d:sonar.login="e5a371653e755fe90ab5ac03f2ad11ea01c50033" ' +
-                '/d:sonar.cs.opencover.reportsPaths=TestNinja.UnitTests/coverage.opencover.xml' +
-                '/d:sonar.coverage.exclusions="**Tests*.cs"'
-                 sh "dotnet test Tests/TestNinja.UnitTests/TestNinja.UnitTests.csproj " +
-                    "/p:CollectCoverage=true /p:CoverletOutputFormat=opencover"
+                '/d:sonar.cs.opencover.reportsPaths=TestNinja.UnitTests/coverage.opencover.xml ' +
+                '/d:sonar.coverage.exclusions="**Test*.cs"'
+                sh 'dotnet build'
                 sh 'dotnet sonarscanner end /d:sonar.login="e5a371653e755fe90ab5ac03f2ad11ea01c50033"'
             }
         }
