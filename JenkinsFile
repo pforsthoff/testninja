@@ -24,8 +24,7 @@ environment {
         }
          stage('Test: Run Nunit Unit Tests'){
             steps {
-            sh "dotnet test Tests/TestNinja.UnitTests/TestNinja.UnitTests.csproj --no-build /p:CollectCoverage=true \n
-                 /p:CoverletOutputFormat=opencover""
+            sh "dotnet test Tests/TestNinja.UnitTests/TestNinja.UnitTests.csproj --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover"
      }
   }
         stage('SonarQube Code Analysis and Coverage') {
