@@ -14,17 +14,15 @@ environment {
                      )
                  }
   }
-        stage('Build (dotnet build)') {
-            steps {
-                sh 'echo "Building dotnet app"'
-                sh '''
-                    dotnet build
-                '''
-            }
+//        stage('Build (dotnet build)') {
+//            steps {
+//                sh 'echo "Building dotnet app"'
+//                    dotnet build
+//            }
         }
          stage('Test: Run Nunit Unit Tests'){
             steps {
-            sh "dotnet test Tests/TestNinja.UnitTests/TestNinja.UnitTests.csproj --no-build " +
+            sh "dotnet test Tests/TestNinja.UnitTests/TestNinja.UnitTests.csproj " +
             "/p:CollectCoverage=true /p:CoverletOutputFormat=opencover"
      }
   }

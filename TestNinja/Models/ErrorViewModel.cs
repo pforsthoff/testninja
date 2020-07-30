@@ -1,5 +1,3 @@
-using System;
-
 namespace TestNinja.Models
 {
     public class ErrorViewModel
