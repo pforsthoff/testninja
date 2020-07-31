@@ -30,7 +30,7 @@ environment {
 //  }
         stage('SonarQube Code Analysis and Coverage') {
             steps {
-                sh 'dotnet sonarscanner begin /k:"letmein" /d:sonar.host.url="http://192.168.1.215" ' +
+                sh 'dotnet sonarscanner begin /k:"TestNinja" /d:sonar.host.url="http://192.168.1.215" ' +
                 '/d:sonar.login="c24d327f456045418c63229a69b387687c318195" /d:sonar.verbose=true ' +
                 '/d:sonar.cs.opencover.reportsPaths=TestNinja.UnitTests/coverage.opencover.xml ' +
                 '/d:sonar.coverage.exclusions="**Test*.cs"'
