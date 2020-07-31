@@ -36,7 +36,6 @@ environment {
                 sh "dotnet test Tests/TestNinja.UnitTests/TestNinja.UnitTests.csproj " +
                     "/p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=coverage"
                 sh 'dotnet sonarscanner end /d:sonar.login="c24d327f456045418c63229a69b387687c318195"'
-                sh 'mv TestNinja.UnitTests/coverage.opencover.xml opencover.xml'
             }
         }
 //        stage('Build Docker image') {
