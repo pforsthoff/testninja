@@ -89,11 +89,12 @@ environment {
 //        }
 stage('Deploy to Test'){
     steps{
-     sh "docker stop $REGISTRY_IMAGE:latest"
-     sh "docker rm $REGISTRY_IMAGE:latest"
         script{
             docker.withServer("$REMOTE_DOCKER_HOST"){
                 docker.withRegistry("$REGISTRY"){
+                    docker.image('$REGISTRY_IMAGE:latest').withRun('-p 5000:5000 -i -t --name $IMAGE --rm $REGISTRY_IMAGE:latest'){
+                                                         sh 'docker stop $REGISTRY_IMAGE:latest'
+                                    }
                     docker.image('$REGISTRY_IMAGE:latest').run('-p 5000:5000 -i -t --name $IMAGE --rm $REGISTRY_IMAGE:latest')
                 }
             }
