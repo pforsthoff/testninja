@@ -76,7 +76,7 @@ environment {
           steps{
               script{
                     try{
-                    sh "docker rm -f $(docker ps -a -q); docker rmi $(docker images -q)"
+                    sh "docker system prune --force --all"
                     }
                     catch (e){}
               }
