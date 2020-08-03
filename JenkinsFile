@@ -72,12 +72,11 @@ environment {
 //         }
 //        }
 
-        stage('Remove Unused docker image') {
+        stage('Remove Unused docker image(s)') {
           steps{
               script{
                     try{
-                    sh "docker rmi $REGISTRY_IMAGE:$BUILD_NUMBER"
-                    sh "docker rmi $REGISTRY_IMAGE:latest"
+                    sh "docker rm -f $(docker ps -a -q); docker rmi $(docker images -q)"
                     }
                     catch (e){}
               }
