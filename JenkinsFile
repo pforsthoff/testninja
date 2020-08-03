@@ -77,8 +77,8 @@ environment {
               script{
                     try{
                     sh "docker rmi $REGISTRY_IMAGE:$BUILD_NUMBER"
-                    sh "docker rmi $REGISTRY_NAME/$REGISTRY_IMAGE:$BUILD_NUMBER"
-                    sh "docker rmi $REGISTRY_NAME/$REGISTRY_IMAGE:latest"
+                    sh "docker rmi $REGISTRY_IMAGE:$BUILD_NUMBER"
+                    sh "docker rmi $REGISTRY_IMAGE:latest"
                     }
                     catch (e){}
               }
