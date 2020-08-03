@@ -50,16 +50,16 @@ environment {
             }
           }
         }
-//        stage('Deploy To Docker') {
-//          steps{
-//            script {
-//              docker.withRegistry( '', registryCredential ) {
-//                dockerImage.push($BUILD_NUMBER)
-//               dockerImage.push("latest")
-//              }
-//            }
-//         }
-//        }
+        stage('Deploy To Docker') {
+          steps{
+            script {
+              docker.withRegistry( '', registryCredential ) {
+                dockerImage.push($BUILD_NUMBER)
+               dockerImage.push("latest")
+              }
+            }
+         }
+        }
 //        stage('Deploy to Tanzu') {
 //          steps{
 //            withCredentials([[$class            :   'UsernamePasswordMultiBinding',
@@ -89,17 +89,17 @@ environment {
 //                sh "dotnet test --logger \"trx;LogFileName=unit_tests.trx\""
 //            }
 //        }
-//stage('Deploy to Test'){
-//    steps{
-//        script{
-//            docker.withServer($REMOTE_DOCKER_HOST){
-//                docker.withRegistry($REGISTRY){
-//                    docker.image('$REGISTRY_NAME/$REGISTRY_IMAGE:latest').run('-p 5000:5000 -i -t --name $IMAGE')
-//                }
-//            }
-//        }
-//    }
-//}
+stage('Deploy to Test'){
+    steps{
+        script{
+            docker.withServer($REMOTE_DOCKER_HOST){
+                docker.withRegistry($REGISTRY){
+                    docker.image('$REGISTRY_NAME/$REGISTRY_IMAGE:latest').run('-p 5000:5000 -i -t --name $IMAGE')
+                }
+            }
+        }
+    }
+}
 
    }
 }
