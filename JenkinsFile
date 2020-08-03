@@ -71,11 +71,17 @@ environment {
 //            }
 //         }
 //        }
+
         stage('Remove Unused docker image') {
           steps{
-            sh "docker rmi $REGISTRY_IMAGE:$BUILD_NUMBER"
-            sh "docker rmi $REGISTRY_NAME/$REGISTRY_IMAGE:$BUILD_NUMBER"
-            sh "docker rmi $REGISTRY_NAME/$REGISTRY_IMAGE:latest"
+              script{
+                    try{
+                    sh "docker rmi $REGISTRY_IMAGE:$BUILD_NUMBER"
+                    sh "docker rmi $REGISTRY_NAME/$REGISTRY_IMAGE:$BUILD_NUMBER"
+                    sh "docker rmi $REGISTRY_NAME/$REGISTRY_IMAGE:latest"
+                    }
+                    catch (e){}
+              }
           }
         }
 //        stage ('Save unit test results') {
