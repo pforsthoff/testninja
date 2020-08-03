@@ -90,11 +90,14 @@ environment {
 stage('Remove Previous Deployment'){
     steps{
         script{
-            docker.withServer("$REMOTE_DOCKER_HOST"){
-                docker.withRegistry("$REGISTRY"){
-                sh "docker stop $IMAGE"
+            try{
+                    docker.withServer("$REMOTE_DOCKER_HOST"){
+                        docker.withRegistry("$REGISTRY"){
+                        sh "docker stop $IMAGE"
+                    }
                 }
-            }
+                catch (e){}
+                }
         }
     }
 }
