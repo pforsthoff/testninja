@@ -31,18 +31,18 @@ environment {
 //            "/p:CollectCoverage=true /p:CoverletOutputFormat=opencover"
 //     }
 //  }
-        stage('SonarQube Code Analysis and Coverage') {
-            steps {
-                sh 'dotnet sonarscanner begin /k:"TestNinja2" /d:sonar.host.url="http://192.168.1.215" ' +
-                '/d:sonar.login="6b8e1356fda8e59d6fce77730be13c7d3f6245e3" /d:sonar.verbose=true ' +
-                '/d:sonar.cs.opencover.reportsPaths=Tests/TestNinja.UnitTests/coverage.opencover.xml ' +
-                '/d:sonar.coverage.exclusions="**Tests*.cs"'
-                sh 'dotnet build'
-                sh 'dotnet test Tests/TestNinja.UnitTests/TestNinja.UnitTests.csproj ' +
-                    '/p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="Tests/TestNinja.UnitTests/coverage.opencover.xml"'
-                sh 'dotnet sonarscanner end /d:sonar.login="6b8e1356fda8e59d6fce77730be13c7d3f6245e3"'
-            }
-        }
+//        stage('SonarQube Code Analysis and Coverage') {
+//            steps {
+//                sh 'dotnet sonarscanner begin /k:"TestNinja2" /d:sonar.host.url="http://192.168.1.215" ' +
+//                '/d:sonar.login="6b8e1356fda8e59d6fce77730be13c7d3f6245e3" /d:sonar.verbose=true ' +
+//                '/d:sonar.cs.opencover.reportsPaths=Tests/TestNinja.UnitTests/coverage.opencover.xml ' +
+//                '/d:sonar.coverage.exclusions="**Tests*.cs"'
+//                sh 'dotnet build'
+//                sh 'dotnet test Tests/TestNinja.UnitTests/TestNinja.UnitTests.csproj ' +
+//                    '/p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="Tests/TestNinja.UnitTests/coverage.opencover.xml"'
+//                sh 'dotnet sonarscanner end /d:sonar.login="6b8e1356fda8e59d6fce77730be13c7d3f6245e3"'
+//            }
+//        }
         stage('Build Docker image') {
           steps{
             script {
@@ -86,8 +86,8 @@ environment {
 stage('Deploy to Test'){
     steps{
         script{
-            docker.withServer(REMOTE_DOCKER_HOST){
-                docker.withRegistry(REGISTRY){
+            docker.withServer($REMOTE_DOCKER_HOST){
+                docker.withRegistry($REGISTRY){
                     docker.image('$REGISTRY_NAME/$REGISTRY_IMAGE:latest').run('-p 5000:5000 -i -t --name $IMAGE')
                 }
             }
