@@ -89,6 +89,8 @@ environment {
 //        }
 stage('Deploy to Test'){
     steps{
+     sh "docker stop $REGISTRY_IMAGE:latest"
+     sh "docker rm $REGISTRY_IMAGE:latest"
         script{
             docker.withServer("$REMOTE_DOCKER_HOST"){
                 docker.withRegistry("$REGISTRY"){
