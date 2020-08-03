@@ -94,10 +94,10 @@ stage('Remove Previous Deployment'){
                     docker.withServer("$REMOTE_DOCKER_HOST"){
                         docker.withRegistry("$REGISTRY"){
                         sh "docker stop $IMAGE"
+                        }
                     }
                 }
                 catch (e){}
-                }
         }
     }
 }
