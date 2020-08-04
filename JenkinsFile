@@ -13,7 +13,6 @@ environment {
         stage('Checkout Code from Github Repo') {
             steps {
                  git( 
-                     credentialsId: '65bf30a5-bbe7-4cd3-aa2a-fb69509a4f19', 
                      url: 'https://github.com/pforsthoff/testninja.git/', 
                      branch: 'master'
                      )
