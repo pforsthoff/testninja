@@ -1,35 +1,38 @@
 ---
 apiVersion: apps/v1
-kind: Deployment 
-metadata: 
-  name: testninja-deployment 
-spec: 
-  selector: 
-    matchLabels: 
-      app: testninja 
-  replicas: 1 # tells deployment to run 2 pods matching the template 
-  template: 
-    metadata: 
-      labels: 
-        app: testninja 
-    spec: 
-      containers: 
-      - name: testninja 
-        image: pforsthoff/testninja:latest 
-        ports: 
-        - containerPort: 80 
---- 
-# https://kubernetes.io/docs/concepts/services-networking/service/#defining-a-service  
-kind: Service 
-apiVersion: v1 
-metadata: 
-  name: testninja-service 
-spec: 
-  selector: 
-    app: testninja 
-  ports: 
-  - protocol: TCP 
-    port: 80 
-    targetPort: 80 
-    nodePort: 31000 
-  type: NodePort 
+kind: Deployment
+metadata:
+  labels:
+    app: myweb
+  name: myweb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myweb
+  template:
+    metadata:
+      labels:
+        app: myweb
+    spec:
+      containers:
+      - image: 192.168.1.81:5000/justme/myweb:1
+        imagePullPolicy: Always
+        name: myweb
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: myweb
+  name: myweb
+spec:
+  ports:
+  - nodePort: 32223
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: myweb
+  type: NodePort
