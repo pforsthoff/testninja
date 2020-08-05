@@ -9,6 +9,7 @@ environment {
     REMOTE_DOCKER_HOST = 'tcp://192.168.1.199:2375'
   }
     agent any
+//    agent {label 'kubepod'}
     stages {
         stage('Checkout Code from Github Repo') {
             steps {
@@ -111,6 +112,12 @@ stage('Deploy to Test (192.168.1.199)'){
         }
     }
 }
-
+//stage('Deploy to K8s (192.168.1.199)'){
+//    steps{
+//        script{
+//           kubernetesDeploy(configs: "nginx.yaml", kubeconfigId: "mykubeconfig")
+//        }
+//    }
+//}
    }
 }
