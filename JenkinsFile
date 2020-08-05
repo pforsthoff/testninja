@@ -8,7 +8,7 @@ environment {
     IMAGE = 'TestNinja'
     REMOTE_DOCKER_HOST = 'tcp://192.168.1.199:2375'
   }
-    agent {label 'kubepod'}
+    agent any
 //    agent {label 'kubepod'}
     stages {
         stage('Checkout Code from Github Repo') {
