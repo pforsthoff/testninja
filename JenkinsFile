@@ -112,12 +112,12 @@ stage('Deploy to Test (192.168.1.199)'){
         }
     }
 }
-//stage('Deploy to K8s (192.168.1.199)'){
-//    steps{
-//        script{
-//           kubernetesDeploy(configs: "deployment.yaml", kubeconfigId: "mykubeconfig")
-//        }
-//    }
-//}
+stage('Deploy to K8s (192.168.1.199)'){
+    steps{
+        script{
+           kubernetesDeploy(configs: "deployment.yaml", kubeconfigId: "mykubeconfig")
+        }
+    }
+}
    }
 }
