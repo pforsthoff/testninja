@@ -8,10 +8,11 @@ environment {
     IMAGE = 'TestNinja'
     REMOTE_DOCKER_HOST = 'tcp://192.168.1.199:2375'
   }
-    agent any
+    agent none
 //    agent {label 'kubepod'}
     stages {
         stage('Checkout Code from Github Repo') {
+        agent any
             steps {
                  git( 
                      url: 'https://github.com/pforsthoff/testninja.git/', 
@@ -44,6 +45,7 @@ environment {
 //    }
 //}
 stage('Build Docker image') {
+agent any
     steps{
     script {
         dockerImage = docker.build('$REGISTRY_IMAGE:$BUILD_NUMBER')
@@ -51,6 +53,7 @@ stage('Build Docker image') {
     }
 }
 stage('Deploy To Docker (On Jenkins Machine)') {
+agent any
     steps{
     script {
         docker.withRegistry( '', REGISTRY_CREDENTIAL ) {
@@ -73,6 +76,7 @@ stage('Deploy To Docker (On Jenkins Machine)') {
 //        }
 
 stage('Remove Unused docker image(s)') {
+agent any
     steps{
         script{
             try{
@@ -88,6 +92,7 @@ stage('Remove Unused docker image(s)') {
 //            }
 //        }
 stage('Stop Previous Deployment from 192.168.1.199'){
+agent any
     steps{
         script{
             try{
@@ -102,6 +107,7 @@ stage('Stop Previous Deployment from 192.168.1.199'){
     }
 }
 stage('Deploy to Test (192.168.1.199)'){
+agent any
     steps{
         script{
             docker.withServer("$REMOTE_DOCKER_HOST"){
@@ -112,8 +118,9 @@ stage('Deploy to Test (192.168.1.199)'){
         }
     }
 }
-agent {label 'kubepod'}
+
 stage('Deploy to K8s (192.168.1.199)'){
+agent {label 'kubepod'}
     steps{
         script{
            kubernetesDeploy(configs: "deployment.yaml", kubeconfigId: "mykubeconfig")
