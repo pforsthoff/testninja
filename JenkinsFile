@@ -11,15 +11,15 @@ environment {
     agent none
 //    agent {label 'kubepod'}
     stages {
-        stage('Checkout Code from Github Repo') {
-        agent any
-            steps {
-                 git( 
-                     url: 'https://github.com/pforsthoff/testninja.git/', 
-                     branch: 'master'
-                     )
-                 }
-        }
+//        stage('Checkout Code from Github Repo') {
+//        agent any
+//           steps {
+//                 git( 
+//                     url: 'https://github.com/pforsthoff/testninja.git/', 
+//                     branch: 'master'
+//                     )
+//                 }
+//        }
 //      stage('Build (dotnet build)') {
 //          steps {
 //              sh 'echo "Building dotnet app"'
@@ -44,25 +44,25 @@ environment {
 //        sh 'dotnet sonarscanner end /d:sonar.login="6b8e1356fda8e59d6fce77730be13c7d3f6245e3"'
 //    }
 //}
-stage('Build Docker image') {
-agent any
-    steps{
-    script {
-        dockerImage = docker.build('$REGISTRY_IMAGE:$BUILD_NUMBER')
-    }
-    }
-}
-stage('Deploy To Docker (On Jenkins Machine)') {
-agent any
-    steps{
-    script {
-        docker.withRegistry( '', REGISTRY_CREDENTIAL ) {
-        dockerImage.push("$BUILD_NUMBER")
-        dockerImage.push("latest")
-        }
-    }
-    }
-}
+//stage('Build Docker image') {
+//agent any
+//    steps{
+//    script {
+//        dockerImage = docker.build('$REGISTRY_IMAGE:$BUILD_NUMBER')
+//    }
+//    }
+//}
+//stage('Deploy To Docker (On Jenkins Machine)') {
+//agent any
+//    steps{
+//    script {
+//        docker.withRegistry( '', REGISTRY_CREDENTIAL ) {
+//        dockerImage.push("$BUILD_NUMBER")
+//        dockerImage.push("latest")
+//        }
+//    }
+//    }
+//}
 //        stage('Deploy to Tanzu') {
 //          steps{
 //            withCredentials([[$class            :   'UsernamePasswordMultiBinding',
@@ -75,55 +75,55 @@ agent any
 //         }
 //        }
 
-stage('Remove Unused docker image(s)') {
-agent any
-    steps{
-        script{
-            try{
-            sh "docker system prune --force --all"
-            }
-            catch (e){}
-        }
-    }
-}
+//stage('Remove Unused docker image(s)') {
+//agent any
+//    steps{
+//        script{
+//            try{
+//            sh "docker system prune --force --all"
+//            }
+//            catch (e){}
+//        }
+//    }
+//}
 //        stage ('Save unit test results') {
 //           steps {
 //                sh "dotnet test --logger \"trx;LogFileName=unit_tests.trx\""
 //            }
 //        }
-stage('Stop Previous Deployment from 192.168.1.199'){
-agent any
-    steps{
-        script{
-            try{
-                    docker.withServer("$REMOTE_DOCKER_HOST"){
-                        docker.withRegistry("$REGISTRY_REPO"){
-                        sh "docker stop $IMAGE"
-                        }
-                    }
-                }
-                catch (e){}
-        }
-    }
-}
-stage('Deploy to Test (192.168.1.199)'){
-agent any
-    steps{
-        script{
-            docker.withServer("$REMOTE_DOCKER_HOST"){
-                docker.withRegistry("$REGISTRY_REPO"){
-                    docker.image('$REGISTRY_IMAGE:latest').run('-p 5000:5000 -i -t --name $IMAGE --rm $REGISTRY_IMAGE:latest')
-                }
-            }
-        }
-    }
-}
+//stage('Stop Previous Deployment from 192.168.1.199'){
+//agent any
+//    steps{
+//        script{
+//            try{
+//                    docker.withServer("$REMOTE_DOCKER_HOST"){
+//                        docker.withRegistry("$REGISTRY_REPO"){
+//                        sh "docker stop $IMAGE"
+//                        }
+//                    }
+//                }
+//                catch (e){}
+//        }
+//    }
+//}
+//stage('Deploy to Test (192.168.1.199)'){
+//agent any
+//    steps{
+//        script{
+//            docker.withServer("$REMOTE_DOCKER_HOST"){
+//                docker.withRegistry("$REGISTRY_REPO"){
+//                    docker.image('$REGISTRY_IMAGE:latest').run('-p 5000:5000 -i -t --name $IMAGE --rm $REGISTRY_IMAGE:latest')
+//                }
+//            }
+//        }
+//    }
+//}
  stage('Checkout Code from Github Repo') {
  agent {label 'kubepod'}
             steps {
                  git( 
                      url: 'https://github.com/justmeandopensource/playjenkins.git', 
-                     branch: 'master'
+                     branch: 'test-deploy-stage'
                      )
                  }
         }
