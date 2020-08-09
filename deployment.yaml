@@ -19,3 +19,17 @@ spec:
         image: pforsthoff/testninja:latest
         ports:
         - containerPort: 80
+--- 
+
+kind: Service 
+apiVersion: v1 
+metadata: 
+  name: testninja-service 
+spec: 
+  selector: 
+    app: testninja 
+  ports: 
+  - protocol: TCP 
+    port: 80 
+    targetPort: 80 
+  type: LoadBalancer 
