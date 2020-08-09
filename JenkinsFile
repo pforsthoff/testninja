@@ -8,30 +8,29 @@ environment {
     IMAGE = 'TestNinja'
     REMOTE_DOCKER_HOST = 'tcp://192.168.1.199:2375'
   }
-    agent none
-//    agent {label 'kubepod'}
+    agent any
     stages {
-//        stage('Checkout Code from Github Repo') {
-//        agent any
-//           steps {
-//                 git( 
-//                     url: 'https://github.com/pforsthoff/testninja.git/', 
-//                     branch: 'master'
-//                     )
-//                 }
-//        }
-//      stage('Build (dotnet build)') {
-//          steps {
-//              sh 'echo "Building dotnet app"'
-//              sh 'dotnet build
-//          }
-//      }
-//         stage('Test: Run Nunit Unit Tests'){
-//            steps {
-//            sh "dotnet test Tests/TestNinja.UnitTests/TestNinja.UnitTests.csproj " +
-//            "/p:CollectCoverage=true /p:CoverletOutputFormat=opencover"
-//     }
-//  }
+        stage('Checkout Code from Github Repo') {
+        agent any
+           steps {
+                 git( 
+                     url: 'https://github.com/pforsthoff/testninja.git/', 
+                     branch: 'master'
+                     )
+                 }
+        }
+      stage('Build (dotnet build)') {
+          steps {
+              sh 'echo "Building dotnet app"'
+              sh 'dotnet build
+          }
+      }
+         stage('Test: Run Nunit Unit Tests'){
+            steps {
+            sh "dotnet test Tests/TestNinja.UnitTests/TestNinja.UnitTests.csproj " +
+            "/p:CollectCoverage=true /p:CoverletOutputFormat=opencover"
+     }
+  }
 //stage('SonarQube Code Analysis and Coverage') {
 //    steps {
 //        sh 'dotnet sonarscanner begin /k:"TestNinja2" /d:sonar.host.url="http://192.168.1.215" ' +
@@ -44,15 +43,15 @@ environment {
 //        sh 'dotnet sonarscanner end /d:sonar.login="6b8e1356fda8e59d6fce77730be13c7d3f6245e3"'
 //    }
 //}
-//stage('Build Docker image') {
-//agent any
-//    steps{
-//    script {
-//        dockerImage = docker.build('$REGISTRY_IMAGE:$BUILD_NUMBER')
-//    }
-//    }
-//}
-//stage('Deploy To Docker (On Jenkins Machine)') {
+stage('Build Docker image') {
+agent any
+    steps{
+    script {
+        dockerImage = docker.build('$REGISTRY_IMAGE:$BUILD_NUMBER')
+    }
+    }
+}
+//stage('Deploy To DockerHub') {
 //agent any
 //    steps{
 //    script {
@@ -118,20 +117,21 @@ environment {
 //        }
 //    }
 //}
- stage('Checkout Code from Github Repo') {
- agent {label 'kubepod'}
-            steps {
-                 git( 
-                     url: 'https://github.com/justmeandopensource/playjenkins.git', 
-                     branch: 'test-deploy-stage'
-                     )
-                 }
-        }
+
+// Deploy to K8s using Kubernetes Plugin for Jenkins
+//stage('Deploy to K8s (192.168.1.199)'){
+//agent {label 'kubepod'}
+//    steps{
+//        script{
+//           kubernetesDeploy(configs: "nginx.yaml", kubeconfigId: "mykubeconfig")
+//        }
+//    }
+//}
+// Deploy to K8s using kubectl directly
 stage('Deploy to K8s (192.168.1.199)'){
-agent {label 'kubepod'}
     steps{
         script{
-           kubernetesDeploy(configs: "nginx.yaml", kubeconfigId: "mykubeconfig")
+           sh 'kubectl apply -f "deloyment.yml"'
         }
     }
 }
