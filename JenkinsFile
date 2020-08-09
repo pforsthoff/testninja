@@ -11,7 +11,6 @@ environment {
     agent any
     stages {
         stage('Checkout Code from Github Repo') {
-        agent any
            steps {
                  git( 
                      url: 'https://github.com/pforsthoff/testninja.git/', 
@@ -44,7 +43,6 @@ environment {
 //    }
 //}
 stage('Build Docker image') {
-agent any
     steps{
     script {
         dockerImage = docker.build('$REGISTRY_IMAGE:$BUILD_NUMBER')
@@ -131,7 +129,7 @@ agent any
 stage('Deploy to K8s (192.168.1.199)'){
     steps{
         script{
-           sh 'kubectl apply -f "deloyment.yml"'
+           sh 'kubectl apply -f deployment.yaml'
         }
     }
 }
