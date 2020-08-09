@@ -22,7 +22,7 @@ environment {
       stage('Build (dotnet build)') {
           steps {
               sh 'echo "Building dotnet app"'
-              sh 'dotnet build
+              sh 'dotnet build'
           }
       }
          stage('Test: Run Nunit Unit Tests'){
