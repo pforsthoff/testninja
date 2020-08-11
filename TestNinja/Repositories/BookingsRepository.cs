@@ -5,7 +5,7 @@ namespace TestNinja.Models
 {
     public class BookingsRepository : IBookingRepository
     {
-        private BookingContext _db;
+        private readonly BookingContext _db;
 
         public BookingsRepository()
         {

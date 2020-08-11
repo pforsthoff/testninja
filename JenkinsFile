@@ -35,7 +35,7 @@ pipeline {
 		        sh 'dotnet sonarscanner begin /k:"TestNinja2" /d:sonar.host.url="http://192.168.1.215" ' +
 		        '/d:sonar.login="6b8e1356fda8e59d6fce77730be13c7d3f6245e3" /d:sonar.verbose=true ' +
 		        '/d:sonar.cs.opencover.reportsPaths=Tests/TestNinja.UnitTests/Tests/TestNinja.UnitTests/coverage.opencover.xml ' +
-		        '/d:sonar.coverage.exclusions="**Tests*.cs,**/wwwroot/**"'
+		        '/d:sonar.coverage.exclusions="**Tests*.cs,**/wwwroot/**,**/Repositories/**"'
 		        sh 'dotnet build'
 		        sh 'dotnet test Tests/TestNinja.UnitTests/TestNinja.UnitTests.csproj ' +
 		            '/p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="Tests/TestNinja.UnitTests/coverage.opencover.xml"'
