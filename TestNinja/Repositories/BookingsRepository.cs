@@ -14,7 +14,7 @@ namespace TestNinja.Models
 
         public IEnumerable<Booking> GetAllBookings(Booking currentBooking)
         {
-            return _db.Booking.Where(x =>x.Id != currentBooking.Id && x.Status != "Cancelled").ToList();
+            return _db.Booking.Where(x => x.Id != currentBooking.Id && x.Status != "Cancelled").ToList();
         }
         public Booking GetBooking(int id)
         {
@@ -28,7 +28,7 @@ namespace TestNinja.Models
                 unitOfWork.Query<Booking>()
                     .Where(
                         b => b.Status != "Cancelled");
-            if(excludedBookingId.HasValue)
+            if (excludedBookingId.HasValue)
             {
                 bookings = bookings.Where(b => b.Id != excludedBookingId.Value);
             }

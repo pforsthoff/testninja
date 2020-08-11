@@ -28,7 +28,6 @@ namespace TestNinja.UnitTests.Mocking
             _bookingRepository = new Mock<IBookingRepository>();
             _bookingRepository.Setup(x => x.GetBooking(It.IsAny<int>()))
                 .Returns((int i) => bookingInMemoryDatabase.Single(bo => bo.Id == i));
-       
         }
         [Test]
         public void GetBooking_BookingExists_ReturnsBooking()
@@ -43,7 +42,7 @@ namespace TestNinja.UnitTests.Mocking
         [Test]
         public void GetBooking_BookingDoesntExist_ReturnsEmpty()
         {
-            Assert.That(() => BookingHelper.BookingExists(5,_bookingRepository.Object),
+            Assert.That(() => BookingHelper.BookingExists(5, _bookingRepository.Object),
                 Throws.Exception
                     .TypeOf<InvalidOperationException>());
         }

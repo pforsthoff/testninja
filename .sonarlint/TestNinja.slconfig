@@ -1,0 +1,12 @@
+{
+  "ServerUri": "http://192.168.1.215",
+  "Organization": null,
+  "ProjectKey": "TestNinja2",
+  "ProjectName": "TestNinja2",
+  "Profiles": {
+    "CSharp": {
+      "ProfileKey": "AXNWkjl3LbrP3hoAkh8U",
+      "ProfileTimestamp": "2020-07-16T07:41:30Z"
+    }
+  }
+}

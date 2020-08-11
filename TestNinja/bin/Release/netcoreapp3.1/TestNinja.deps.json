@@ -25,6 +25,7 @@
       "TestNinja/1.0.0": {
         "dependencies": {
           "EntityFramework": "6.4.4",
+          "SonarAnalyzer.CSharp": "8.11.0.20529",
           "Steeltoe.Extensions.Configuration.CloudFoundryCore": "2.4.4",
           "Steeltoe.Extensions.Configuration.ConfigServerCore": "3.0.0-m3",
           "Microsoft.AspNetCore.Antiforgery": "3.1.0.0",
@@ -590,6 +591,7 @@
           }
         }
       },
+      "SonarAnalyzer.CSharp/8.11.0.20529": {},
       "Steeltoe.Common/3.0.0-m3": {
         "dependencies": {
           "Microsoft.Extensions.Caching.Abstractions": "3.1.0",
@@ -3271,6 +3273,13 @@
       "sha512": "sha512-YhEdSQUsTx+C8m8Bw7ar5/VesXvCFMItyZF7G1AUY+OM0VPZUOeAVpJ4Wl6fydBGUYZxojTDR3I6Bj/+BPkJNA==",
       "path": "runtime.win-x86.runtime.native.system.data.sqlclient.sni/4.4.0",
       "hashPath": "runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512"
+    },
+    "SonarAnalyzer.CSharp/8.11.0.20529": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-vOg4K+A0ivd8equOBZackV+k9ak927aNvPofEtSGePHydc77fKiN6eGESaP7qdq52L02+kllT+OSCww1/5VsCQ==",
+      "path": "sonaranalyzer.csharp/8.11.0.20529",
+      "hashPath": "sonaranalyzer.csharp.8.11.0.20529.nupkg.sha512"
     },
     "Steeltoe.Common/3.0.0-m3": {
       "type": "package",
