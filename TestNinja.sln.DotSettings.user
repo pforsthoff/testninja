@@ -1,0 +1,12 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=af9c7168_002Dfdf2_002D4ec5_002D8c68_002Dfa02ea7dbc9f/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GetBooking_BookingDoesntExist_ReturnsEmpty" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::3D47B8FD-E8AC-4A50-8671-3A3E67B824E6::.NETCoreApp,Version=v3.1::TestNinja.UnitTests.Mocking.RepositoryTests.GetBooking_BookingDoesntExist_ReturnsEmpty&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b4ba0f02_002D25d1_002D4fe6_002Db0aa_002Dad2d4078880f/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GetBooking_BookingExists_ReturnsBooking" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::3D47B8FD-E8AC-4A50-8671-3A3E67B824E6::.NETCoreApp,Version=v3.1::TestNinja.UnitTests.Mocking.RepositoryTests.GetBooking_BookingExists_ReturnsBooking&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::3D47B8FD-E8AC-4A50-8671-3A3E67B824E6::.NETCoreApp,Version=v3.1::TestNinja.UnitTests.Mocking.RepositoryTests.GetBooking_BookingDoesntExist_ReturnsEmpty&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

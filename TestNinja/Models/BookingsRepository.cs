@@ -16,7 +16,10 @@ namespace TestNinja.Models
         {
             return _db.Booking.Where(x =>x.Id != currentBooking.Id && x.Status != "Cancelled").ToList();
         }
-
+        public Booking GetBooking(int id)
+        {
+            return _db.Booking.SingleOrDefault(b => b.Id == id);
+        }
         public IQueryable<Booking> GetActiveBookings(int? excludedBookingId = null)
         {
             var unitOfWork = new UnitOfWork();

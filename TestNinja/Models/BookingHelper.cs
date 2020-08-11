@@ -21,6 +21,11 @@ namespace TestNinja.Models
 
             return overlappingBooking == null ? string.Empty : overlappingBooking.Reference;
         }
+        public static string BookingExists(int id, IBookingRepository bookingRepository)
+        {
+            var booking = bookingRepository.GetBooking(id);
+            return booking == null ? string.Empty : booking.Reference;
+        }
     }
 
     public class Booking
