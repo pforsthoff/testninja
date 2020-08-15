@@ -50,7 +50,6 @@ pipeline {
             }
         }
 		stage('Deploy To DockerHub') {
-		agent any
 		    steps{
 		    script {
 		        docker.withRegistry( '', REGISTRY_CREDENTIAL ) {
@@ -73,7 +72,6 @@ pipeline {
 		//        }
 
 		stage('Remove Unused docker image(s)') {
-		agent any
 		    steps{
 		        script{
 		            try{
@@ -89,7 +87,6 @@ pipeline {
 		//            }
 		//        }
 		stage('Stop Previous Deployment from 192.168.1.199'){
-		agent any
 		    steps{
 		        script{
 		            try{
