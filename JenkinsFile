@@ -10,26 +10,26 @@ pipeline {
       }
     agent any
     stages {
-        //stage('Checkout Code from Github Repo') {
-        //    steps {
-        //            git( 
-        //                url: 'https://github.com/pforsthoff/testninja.git/', 
-        //                branch: 'master'
-        //                )
-        //    }
-        //}
-        //stage('Build (dotnet build)') {
-        //    steps {
-        //        sh 'echo "Building dotnet app"'
-        //        sh 'dotnet build'
-        //    }
-        //}
-        //stage('Test: Run Nunit Unit Tests'){
-        //    steps {
-        //    sh "dotnet test Tests/TestNinja.UnitTests/TestNinja.UnitTests.csproj " +
-        //    "/p:CollectCoverage=true /p:CoverletOutputFormat=opencover"
-        //    }
-        //}
+        stage('Checkout Code from Github Repo') {
+            steps {
+                    git( 
+                        url: 'https://github.com/pforsthoff/testninja.git/', 
+                        branch: 'master'
+                        )
+            }
+        }
+        stage('Build (dotnet build)') {
+            steps {
+                sh 'echo "Building dotnet app"'
+                sh 'dotnet build'
+            }
+        }
+        stage('Test: Run Nunit Unit Tests'){
+            steps {
+            sh "dotnet test Tests/TestNinja.UnitTests/TestNinja.UnitTests.csproj " +
+            "/p:CollectCoverage=true /p:CoverletOutputFormat=opencover"
+            }
+        }
 		stage('SonarQube Code Analysis and Coverage') {
 		    steps {
 		        sh 'dotnet sonarscanner begin /k:"TestNinja2" /d:sonar.host.url="http://192.168.1.215" ' +
@@ -42,24 +42,24 @@ pipeline {
 		        sh 'dotnet sonarscanner end /d:sonar.login="6b8e1356fda8e59d6fce77730be13c7d3f6245e3"'
 		    }
 		}
-        //stage('Build Docker image') {
-        //    steps{
-        //        script {
-        //            dockerImage = docker.build('$REGISTRY_IMAGE:$BUILD_NUMBER')
-        //        }
-        //    }
-        //}
-		//stage('Deploy To DockerHub') {
-		//agent any
-		//    steps{
-		//    script {
-		//        docker.withRegistry( '', REGISTRY_CREDENTIAL ) {
-		//        dockerImage.push("$BUILD_NUMBER")
-		//        dockerImage.push("latest")
-		//        }
-		//    }
-		//    }
-		//}
+        stage('Build Docker image') {
+            steps{
+                script {
+                    dockerImage = docker.build('$REGISTRY_IMAGE:$BUILD_NUMBER')
+                }
+            }
+        }
+		stage('Deploy To DockerHub') {
+		agent any
+		    steps{
+		    script {
+		        docker.withRegistry( '', REGISTRY_CREDENTIAL ) {
+		        dockerImage.push("$BUILD_NUMBER")
+		        dockerImage.push("latest")
+		        }
+		    }
+		    }
+		}
 		//        stage('Deploy to Tanzu') {
 		//          steps{
 		//            withCredentials([[$class            :   'UsernamePasswordMultiBinding',
@@ -72,37 +72,37 @@ pipeline {
 		//         }
 		//        }
 
-		//stage('Remove Unused docker image(s)') {
-		//agent any
-		//    steps{
-		//        script{
-		//            try{
-		//            sh "docker system prune --force --all"
-		//            }
-		//            catch (e){}
-		//        }
-		//    }
-		//}
+		stage('Remove Unused docker image(s)') {
+		agent any
+		    steps{
+		        script{
+		            try{
+		            sh "docker system prune --force --all"
+		            }
+		            catch (e){}
+		        }
+		    }
+		}
 		//        stage ('Save unit test results') {
 		//           steps {
 		//                sh "dotnet test --logger \"trx;LogFileName=unit_tests.trx\""
 		//            }
 		//        }
-		//stage('Stop Previous Deployment from 192.168.1.199'){
-		//agent any
-		//    steps{
-		//        script{
-		//            try{
-		//                    docker.withServer("$REMOTE_DOCKER_HOST"){
-		//                        docker.withRegistry("$REGISTRY_REPO"){
-		//                        sh "docker stop $IMAGE"
-		//                        }
-		//                    }
-		//                }
-		//                catch (e){}
-		//        }
-		//    }
-		//}
+		stage('Stop Previous Deployment from 192.168.1.199'){
+		agent any
+		    steps{
+		        script{
+		            try{
+		                    docker.withServer("$REMOTE_DOCKER_HOST"){
+		                        docker.withRegistry("$REGISTRY_REPO"){
+		                        sh "docker stop $IMAGE"
+		                        }
+		                    }
+		                }
+		                catch (e){}
+		        }
+		    }
+		}
 		//stage('Deploy to Test (192.168.1.199)'){
 		//agent any
 		//    steps{
