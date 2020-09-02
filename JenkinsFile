@@ -1,13 +1,19 @@
 // Scripted Pipeline with stages
 node {
-  stage('Source') { // Get code
-    git( 
-                        url: 'https://github.com/pforsthoff/testninja.git/', 
-                        branch: 'master'
-                        )
-  }
-  stage('Build (dotnet build)') {
-            sh 'echo "Building dotnet app"'
-                sh 'dotnet build'
+withCredentials([usernameColonPassword(credentialsId: 'dockerhub', variable: 'USERPASS')]) {
+    stage('Source') { // Get code
+        git( 
+            url: 'https://github.com/pforsthoff/testninja.git/', 
+            branch: 'master'
+            )
+    }
+    stage('Build (dotnet build)') {
+        sh 'echo "Building dotnet app"'
+        sh 'dotnet build'
         }
+    stage 'Docker push'
+        docker.withRegistry('https://hub.docker.com/pforsthoff/pforsthoff', '$USERPASS') {
+        docker.image('demo').push('latest')
+    }
+  }
 }
