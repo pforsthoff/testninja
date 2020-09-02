@@ -1,5 +1,5 @@
 // Scripted Pipeline with stages
-node ('worker_node1') {
+node {
   stage('Source') { // Get code
     git( 
                         url: 'https://github.com/pforsthoff/testninja.git/', 
