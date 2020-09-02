@@ -3,7 +3,13 @@ def makeStage = {
     echo 'Hello World'
   }
 } 
+def makeStage2 = {
+  stage('b') {
+    echo 'Hello World2'
+  }
+} 
 
 node {
     makeStage()
+     makeStage2()
 }
