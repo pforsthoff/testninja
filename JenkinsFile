@@ -1,15 +1,12 @@
-def makeStage = {
-  stage('a') {
-    echo 'Hello World'
+// Scripted Pipeline with stages
+node ('Checkout Code') {
+   git( 
+        url: 'https://github.com/pforsthoff/testninja.git/', 
+        branch: 'master'
+        )
+  stage('Compile') { // Compile and do unit testing
+   
+    sh 'echo "Building dotnet app"'
+                sh 'dotnet build'
   }
-} 
-def makeStage2 = {
-  stage('b') {
-    echo 'Hello World2'
-  }
-} 
-
-node {
-    makeStage()
-     makeStage2()
 }
