@@ -1,12 +1,15 @@
 // Scripted Pipeline with stages
-node ('Checkout Code') {
-   git( 
-        url: 'https://github.com/pforsthoff/testninja.git/', 
-        branch: 'master'
-        )
-  stage('Compile') { // Compile and do unit testing
-   
-    sh 'echo "Building dotnet app"'
-                sh 'dotnet build'
+node ('worker_node1') {
+  stage('Source') { // Get code
+    git( 
+                        url: 'https://github.com/pforsthoff/testninja.git/', 
+                        branch: 'master'
+                        )
   }
+  stage('Build (dotnet build)') {
+            steps {
+                sh 'echo "Building dotnet app"'
+                sh 'dotnet build'
+            }
+        }
 }
