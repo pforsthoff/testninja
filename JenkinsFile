@@ -1,6 +1,5 @@
 // Scripted Pipeline with stages
 node {
-withCredentials([usernameColonPassword(credentialsId: 'dockerhub', variable: 'USERPASS')]) {
     stage('Source') { // Get code
         git( 
             url: 'https://github.com/pforsthoff/testninja.git/', 
@@ -12,8 +11,8 @@ withCredentials([usernameColonPassword(credentialsId: 'dockerhub', variable: 'US
         sh 'dotnet build'
         }
     stage 'Docker push'
-        docker.withRegistry('https://hub.docker.com/pforsthoff/pforsthoff', $USERPASS) {
-        docker.image('demo').push('latest')
+        docker.withRegistry('https://hub.docker.com/pforsthoff/pforsthoff', 'dockerhub') {
+        docker.image('pforsthoff/testninja').push('latest')
     }
   }
 }
