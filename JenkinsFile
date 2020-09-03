@@ -10,6 +10,10 @@ node {
         sh 'echo "Building dotnet app"'
         sh 'dotnet build'
         }
+    stage('Build (dotnet test)') {
+        sh 'echo "Testing dotnet app"'
+        sh 'dotnet test /p:CollectCoverage=true'
+        }
     stage('Build Docker image') {
         script {
                 dockerImage = docker.build('pforsthoff/testninja:$BUILD_NUMBER')

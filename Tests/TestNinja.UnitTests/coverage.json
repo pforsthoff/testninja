@@ -1,0 +1,582 @@
+{
+  "TestNinja.dll": {
+    "C:\\Projects\\UnitTests\\TestNinja\\TestNinja\\Program.cs": {
+      "TestNinja.Program": {
+        "System.Void TestNinja.Program::Main(System.String[])": {
+          "Lines": {
+            "12": 0,
+            "13": 0
+          },
+          "Branches": []
+        },
+        "Microsoft.Extensions.Hosting.IHostBuilder TestNinja.Program::CreateHostBuilder(System.String[])": {
+          "Lines": {
+            "16": 0,
+            "17": 0,
+            "18": 0,
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "25": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Projects\\UnitTests\\TestNinja\\TestNinja\\Startup.cs": {
+      "TestNinja.Startup": {
+        "Microsoft.Extensions.Configuration.IConfiguration TestNinja.Startup::get_Configuration()": {
+          "Lines": {
+            "18": 0
+          },
+          "Branches": []
+        },
+        "System.Void TestNinja.Startup::ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)": {
+          "Lines": {
+            "23": 0,
+            "24": 0
+          },
+          "Branches": []
+        },
+        "System.Void TestNinja.Startup::Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment,Microsoft.Extensions.Logging.ILoggerFactory)": {
+          "Lines": {
+            "29": 0,
+            "31": 0,
+            "32": 0,
+            "35": 0,
+            "37": 0,
+            "39": 0,
+            "41": 0,
+            "43": 0,
+            "44": 0,
+            "45": 0,
+            "46": 0,
+            "47": 0,
+            "48": 0,
+            "49": 0
+          },
+          "Branches": [
+            {
+              "Line": 29,
+              "Offset": 6,
+              "EndOffset": 8,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 29,
+              "Offset": 6,
+              "EndOffset": 17,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void TestNinja.Startup::.ctor(Microsoft.Extensions.Configuration.IConfiguration)": {
+          "Lines": {
+            "13": 0,
+            "15": 0,
+            "16": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Projects\\UnitTests\\TestNinja\\TestNinja\\Models\\BookingHelper.cs": {
+      "TestNinja.Models.BookingHelper": {
+        "System.String TestNinja.Models.BookingHelper::OverlappingBookingsExist(TestNinja.Models.Booking,TestNinja.Models.IBookingRepository)": {
+          "Lines": {
+            "11": 6,
+            "12": 1,
+            "14": 5,
+            "15": 5,
+            "16": 5,
+            "17": 5,
+            "18": 5,
+            "19": 5,
+            "20": 5,
+            "22": 5
+          },
+          "Branches": [
+            {
+              "Line": 11,
+              "Offset": 34,
+              "EndOffset": 36,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 11,
+              "Offset": 34,
+              "EndOffset": 42,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 5
+            },
+            {
+              "Line": 22,
+              "Offset": 300,
+              "EndOffset": 302,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 4
+            },
+            {
+              "Line": 22,
+              "Offset": 300,
+              "EndOffset": 309,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 1
+            }
+          ]
+        },
+        "System.String TestNinja.Models.BookingHelper::BookingExists(System.Int32,TestNinja.Models.IBookingRepository)": {
+          "Lines": {
+            "26": 2,
+            "27": 1
+          },
+          "Branches": [
+            {
+              "Line": 27,
+              "Offset": 9,
+              "EndOffset": 11,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 27,
+              "Offset": 9,
+              "EndOffset": 18,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        }
+      },
+      "TestNinja.Models.Booking": {
+        "System.String TestNinja.Models.Booking::get_Status()": {
+          "Lines": {
+            "33": 7
+          },
+          "Branches": []
+        },
+        "System.Int32 TestNinja.Models.Booking::get_Id()": {
+          "Lines": {
+            "34": 29
+          },
+          "Branches": []
+        },
+        "System.DateTime TestNinja.Models.Booking::get_ArrivalDate()": {
+          "Lines": {
+            "35": 35
+          },
+          "Branches": []
+        },
+        "System.DateTime TestNinja.Models.Booking::get_DepartureDate()": {
+          "Lines": {
+            "36": 33
+          },
+          "Branches": []
+        },
+        "System.String TestNinja.Models.Booking::get_Reference()": {
+          "Lines": {
+            "37": 21
+          },
+          "Branches": []
+        }
+      },
+      "TestNinja.Models.BookingContext": {
+        "System.Data.Entity.DbSet`1<TestNinja.Models.Booking> TestNinja.Models.BookingContext::get_Booking()": {
+          "Lines": {
+            "41": 0
+          },
+          "Branches": []
+        },
+        "System.Void TestNinja.Models.BookingContext::SaveChanges()": {
+          "Lines": {
+            "45": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Projects\\UnitTests\\TestNinja\\TestNinja\\Models\\ErrorViewModel.cs": {
+      "TestNinja.Models.ErrorViewModel": {
+        "System.String TestNinja.Models.ErrorViewModel::get_RequestId()": {
+          "Lines": {
+            "5": 0
+          },
+          "Branches": []
+        },
+        "System.Boolean TestNinja.Models.ErrorViewModel::get_ShowRequestId()": {
+          "Lines": {
+            "7": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Projects\\UnitTests\\TestNinja\\TestNinja\\Repositories\\BookingsRepository.cs": {
+      "TestNinja.Models.BookingsRepository": {
+        "System.Collections.Generic.IEnumerable`1<TestNinja.Models.Booking> TestNinja.Models.BookingsRepository::GetAllBookings(TestNinja.Models.Booking)": {
+          "Lines": {
+            "17": 0
+          },
+          "Branches": []
+        },
+        "TestNinja.Models.Booking TestNinja.Models.BookingsRepository::GetBooking(System.Int32)": {
+          "Lines": {
+            "21": 0
+          },
+          "Branches": []
+        },
+        "System.Linq.IQueryable`1<TestNinja.Models.Booking> TestNinja.Models.BookingsRepository::GetActiveBookings(System.Nullable`1<System.Int32>)": {
+          "Lines": {
+            "25": 0,
+            "27": 0,
+            "28": 0,
+            "29": 0,
+            "30": 0,
+            "31": 0,
+            "33": 0,
+            "35": 0
+          },
+          "Branches": [
+            {
+              "Line": 31,
+              "Offset": 124,
+              "EndOffset": 126,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 31,
+              "Offset": 124,
+              "EndOffset": 251,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void TestNinja.Models.BookingsRepository::.ctor()": {
+          "Lines": {
+            "10": 0,
+            "12": 0,
+            "13": 0
+          },
+          "Branches": []
+        }
+      },
+      "TestNinja.Models.BookingsRepository/UnitOfWork": {
+        "System.Linq.IQueryable`1<T> TestNinja.Models.BookingsRepository/UnitOfWork::Query()": {
+          "Lines": {
+            "41": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Projects\\UnitTests\\TestNinja\\TestNinja\\Controllers\\HomeController.cs": {
+      "TestNinja.Controllers.HomeController": {
+        "Microsoft.AspNetCore.Mvc.IActionResult TestNinja.Controllers.HomeController::Index()": {
+          "Lines": {
+            "20": 0
+          },
+          "Branches": []
+        },
+        "Microsoft.AspNetCore.Mvc.IActionResult TestNinja.Controllers.HomeController::Privacy()": {
+          "Lines": {
+            "25": 0
+          },
+          "Branches": []
+        },
+        "Microsoft.AspNetCore.Mvc.IActionResult TestNinja.Controllers.HomeController::Error()": {
+          "Lines": {
+            "31": 0
+          },
+          "Branches": [
+            {
+              "Line": 31,
+              "Offset": 13,
+              "EndOffset": 15,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 31,
+              "Offset": 13,
+              "EndOffset": 19,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 31,
+              "Offset": 25,
+              "EndOffset": 27,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 31,
+              "Offset": 25,
+              "EndOffset": 39,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void TestNinja.Controllers.HomeController::.ctor(Microsoft.Extensions.Logging.ILogger`1<TestNinja.Controllers.HomeController>)": {
+          "Lines": {
+            "12": 0,
+            "14": 0,
+            "15": 0
+          },
+          "Branches": []
+        }
+      }
+    }
+  },
+  "TestNinja.Views.dll": {
+    "C:\\Projects\\UnitTests\\TestNinja\\TestNinja\\Views\\Home\\Index.cshtml": {
+      "AspNetCore.Views_Home_Index/<ExecuteAsync>d__0": {
+        "System.Void AspNetCore.Views_Home_Index/<ExecuteAsync>d__0::MoveNext()": {
+          "Lines": {
+            "2": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Projects\\UnitTests\\TestNinja\\TestNinja\\Views\\Home\\Privacy.cshtml": {
+      "AspNetCore.Views_Home_Privacy/<ExecuteAsync>d__0": {
+        "System.Void AspNetCore.Views_Home_Privacy/<ExecuteAsync>d__0::MoveNext()": {
+          "Lines": {
+            "2": 0,
+            "4": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Projects\\UnitTests\\TestNinja\\TestNinja\\Views\\Shared\\Error.cshtml": {
+      "AspNetCore.Views_Shared_Error/<ExecuteAsync>d__0": {
+        "System.Void AspNetCore.Views_Shared_Error/<ExecuteAsync>d__0::MoveNext()": {
+          "Lines": {
+            "3": 0,
+            "9": 0,
+            "12": 0
+          },
+          "Branches": [
+            {
+              "Line": 9,
+              "Offset": 57,
+              "EndOffset": 59,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 9,
+              "Offset": 57,
+              "EndOffset": 98,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        }
+      }
+    },
+    "C:\\Projects\\UnitTests\\TestNinja\\TestNinja\\Views\\Shared\\_Layout.cshtml": {
+      "AspNetCore.Views_Shared__Layout/<<ExecuteAsync>b__23_0>d": {
+        "System.Void AspNetCore.Views_Shared__Layout/<<ExecuteAsync>b__23_0>d::MoveNext()": {
+          "Lines": {
+            "6": 0
+          },
+          "Branches": [
+            {
+              "Line": 6,
+              "Offset": 318,
+              "EndOffset": 320,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 6,
+              "Offset": 318,
+              "EndOffset": 416,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 6,
+              "Offset": 702,
+              "EndOffset": 704,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 6,
+              "Offset": 702,
+              "EndOffset": 800,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            }
+          ]
+        }
+      },
+      "AspNetCore.Views_Shared__Layout/<<ExecuteAsync>b__23_1>d": {
+        "System.Void AspNetCore.Views_Shared__Layout/<<ExecuteAsync>b__23_1>d::MoveNext()": {
+          "Lines": {
+            "34": 0,
+            "45": 0,
+            "46": 0
+          },
+          "Branches": [
+            {
+              "Line": 34,
+              "Offset": 416,
+              "EndOffset": 418,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 34,
+              "Offset": 416,
+              "EndOffset": 514,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 34,
+              "Offset": 891,
+              "EndOffset": 893,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 34,
+              "Offset": 891,
+              "EndOffset": 992,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 34,
+              "Offset": 1369,
+              "EndOffset": 1371,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 34,
+              "Offset": 1369,
+              "EndOffset": 1470,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 34,
+              "Offset": 1854,
+              "EndOffset": 1856,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 34,
+              "Offset": 1854,
+              "EndOffset": 1955,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 0
+            },
+            {
+              "Line": 34,
+              "Offset": 2225,
+              "EndOffset": 2227,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 0
+            },
+            {
+              "Line": 34,
+              "Offset": 2225,
+              "EndOffset": 2327,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 0
+            },
+            {
+              "Line": 34,
+              "Offset": 2598,
+              "EndOffset": 2600,
+              "Path": 0,
+              "Ordinal": 10,
+              "Hits": 0
+            },
+            {
+              "Line": 34,
+              "Offset": 2598,
+              "EndOffset": 2700,
+              "Path": 1,
+              "Ordinal": 11,
+              "Hits": 0
+            },
+            {
+              "Line": 45,
+              "Offset": 3076,
+              "EndOffset": 3078,
+              "Path": 0,
+              "Ordinal": 12,
+              "Hits": 0
+            },
+            {
+              "Line": 45,
+              "Offset": 3076,
+              "EndOffset": 3178,
+              "Path": 1,
+              "Ordinal": 13,
+              "Hits": 0
+            }
+          ]
+        }
+      }
+    },
+    "C:\\Projects\\UnitTests\\TestNinja\\TestNinja\\Views\\_ViewStart.cshtml": {
+      "AspNetCore.Views__ViewStart/<ExecuteAsync>d__0": {
+        "System.Void AspNetCore.Views__ViewStart/<ExecuteAsync>d__0::MoveNext()": {
+          "Lines": {
+            "2": 0
+          },
+          "Branches": []
+        }
+      }
+    }
+  }
+}
