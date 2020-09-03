@@ -10,7 +10,7 @@ node {
         sh 'echo "Building dotnet app"'
         sh 'dotnet build'
         }
-    stage 'Docker push'
+    stage ('Docker push') {
         docker.withRegistry('https://hub.docker.com/pforsthoff/pforsthoff', 'dockerhub') {
         docker.image('pforsthoff/testninja').push('latest')
     }
