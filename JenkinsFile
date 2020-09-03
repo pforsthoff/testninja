@@ -11,7 +11,7 @@ node {
         sh 'dotnet build'
         }
     stage ('Docker push') {
-        docker.withRegistry('https://hub.docker.com/pforsthoff/pforsthoff', 'dockerhub') {
+        docker.withRegistry('https://hub.docker.com/pforsthoff/testninja', 'dockerhub') {
         docker.image('pforsthoff/testninja').push('latest')
     }
   }
