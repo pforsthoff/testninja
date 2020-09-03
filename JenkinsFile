@@ -12,7 +12,7 @@ node {
         }
     stage('Build (dotnet test)') {
         sh 'echo "Testing dotnet app"'
-        sh 'dotnet test TestNinja.sln /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="coverage.opencover.xml'
+        sh 'dotnet test TestNinja.sln /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="coverage.opencover.xml"'
         }
     stage('Build Docker image') {
         script {
