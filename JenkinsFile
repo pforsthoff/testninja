@@ -14,13 +14,17 @@ node {
         sh 'echo "Testing dotnet app"'
         sh 'dotnet test TestNinja.sln /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="coverage.opencover.xml"'
         }
+    stage('Initialize'){
+            def dockerHome = tool 'myDocker'
+            env.PATH = "${dockerHome}/bin:${env.PATH}"
+        }
     stage('Build Docker image') {
-        script {
+        
                 dockerImage = docker.build('pforsthoff/testninja:$BUILD_NUMBER')
-            }
+            
     }
     stage ('Docker push') {
-        docker.withRegistry('https://hub.docker.com/pforsthoff/testninja', 'dockerhub') {
+        docker.withRegistry('https://hub.docker.com/repository/docker/pforsthoff/testninja', 'dockerhub') {
         docker.image('pforsthoff/testninja').push('latest')
     }
   }
