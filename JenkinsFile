@@ -14,10 +14,6 @@ node {
         sh 'echo "Testing dotnet app"'
         sh 'dotnet test TestNinja.sln /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="coverage.opencover.xml"'
         }
-    stage('Initialize'){
-            def dockerHome = tool 'myDocker'
-            env.PATH = "${dockerHome}/bin:${env.PATH}"
-        }
     stage('Build Docker image') {
         
                 dockerImage = docker.build('pforsthoff/testninja:$BUILD_NUMBER')
