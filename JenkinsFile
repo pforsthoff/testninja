@@ -20,7 +20,7 @@ node {
             
     }
     stage ('Docker push') {
-        docker.withRegistry('https://hub.docker.com/repository/docker/pforsthoff/testninja', 'dockerhub') {
+        docker.withRegistry([credentialsId: 'dockerhub',  url: 'https://hub.docker.com/repository/docker/pforsthoff/testninja']) {
         docker.image('pforsthoff/testninja').push('latest')
     }
   }
