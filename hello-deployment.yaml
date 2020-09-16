@@ -1,0 +1,28 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: hello-app
+  namespace: jenkins
+  labels:
+    app: hello
+spec:
+  containers:
+    - name: hello-app
+      image: hashicorp/http-echo
+      args:
+        - "-text=hello"
+  serviceAccount: jenkins
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: hello-service
+  namespace: jenkins
+spec:
+  selector:
+    app: hello
+  ports:
+    - name: http
+      port: 80
+      targetPort: 5678 # Default port for image
