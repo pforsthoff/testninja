@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -9,7 +10,6 @@ spec:
     - name: testninja-app
       image: pforsthoff/testninja
 ---
-
 kind: Service
 apiVersion: v1
 metadata:
