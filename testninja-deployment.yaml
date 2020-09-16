@@ -3,6 +3,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: testninja-app
+  namespace: jenkins
   labels:
     app: testninja-app
 spec:
@@ -15,6 +16,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: testninja-service
+  namespace: jenkins
 spec:
   selector:
     app: testninja-app
