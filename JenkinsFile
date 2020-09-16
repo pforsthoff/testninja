@@ -27,10 +27,14 @@ node {
 //            }
 //        }
 //
- stage('Deploy App to K8s') {
-       sh "kubectl apply -f testninja-deployment.yaml"
-      
+// stage('Deploy App to K8s') {
+//       sh "kubectl apply -f testninja-deployment.yaml"
+//      
+//    }
+stage('Apply Kubernetes files') {
+    withKubeConfig([credentialsId: 'jenkins-deployer-credentials', serverUrl: 'https://192.168.1.221:6443']) {
+      sh 'kubectl get all'
     }
-
+  }
 
 }
