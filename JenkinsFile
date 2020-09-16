@@ -28,7 +28,7 @@ node {
 //        }
 //
  stage('Deploy App to K8s') {
-       sh "kubectl apply -f testninja-deployment.yaml""
+       sh "kubectl apply -f testninja-deployment.yaml"
       
     }
 
