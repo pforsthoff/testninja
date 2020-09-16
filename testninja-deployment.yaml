@@ -1,0 +1,23 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: testninja-app
+  labels:
+    app: testninja-app
+spec:
+  containers:
+    - name: testninja-app
+      image: pforsthoff/testninja
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: testninja-service
+spec:
+  selector:
+    app: testninja-app
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80# Default port for image
