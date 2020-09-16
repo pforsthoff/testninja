@@ -28,10 +28,8 @@ node {
 //        }
 //
  stage('Deploy App to K8s') {
-      steps {
-        script {
+       script {
           kubernetesDeploy(configs: "testninja-deployment.yaml", kubeconfigId: "k8sconfig")
-        }
       }
     }
 
