@@ -1,6 +1,5 @@
----
-apiVersion: apps/v1
-kind: Deployment
+kind: Pod
+apiVersion: v1
 metadata:
   name: testninja-app
   namespace: jenkins
@@ -10,8 +9,10 @@ spec:
   containers:
     - name: testninja-app
       image: pforsthoff/testninja
+      
   serviceAccount: jenkins
 ---
+
 kind: Service
 apiVersion: v1
 metadata:
@@ -23,4 +24,4 @@ spec:
   ports:
     - name: http
       port: 80
-      targetPort: 80# Default port for image
+      targetPort: 80 # Default port for image
