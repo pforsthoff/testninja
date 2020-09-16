@@ -25,3 +25,19 @@ spec:
     - name: http
       port: 80
       targetPort: 80 # Default port for image
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: testninja
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: testninja.csharpsnippets.local
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: testninja-service
+          servicePort: http
