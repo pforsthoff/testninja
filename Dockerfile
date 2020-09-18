@@ -2,7 +2,7 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /build
 #map a volume to workspace/TestNinja
-docker run -it --rm --name dotnet-runner -v /var/jenkins_home/workspace/TestNinja:/build dotnet restore dotnet publish -c Release -o /app
+RUN -it --rm --name dotnet-runner -v /var/jenkins_home/workspace/TestNinja:/build dotnet restore dotnet publish -c Release -o /app
 
 #COPY . .
 #RUN dotnet restore
