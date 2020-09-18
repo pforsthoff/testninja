@@ -16,7 +16,7 @@ node {
 //        }
     stage('Build Docker image') {
         
-			    docker.image('pforsthoff/testninja').withRun("-v .:/app"){ c ->
+			    docker.image('pforsthoff/testninja').withRun("-v ./:/app"){ c ->
 			sh "docker build ."
 		}
 
