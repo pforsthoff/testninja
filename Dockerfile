@@ -1,6 +1,6 @@
 # Stage 1
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
-WORKDIR /build
+WORKDIR /app
 #map a volume to workspace/TestNinja
 
 #COPY . .

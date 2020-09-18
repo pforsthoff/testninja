@@ -10,13 +10,13 @@ node {
         sh 'echo "Building dotnet app"'
         sh 'dotnet build'
         }
-    stage('Build (dotnet test)') {
-        sh 'echo "Testing dotnet app"'
-        sh 'dotnet test TestNinja.sln /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="coverage.opencover.xml"'
-        }
+//    stage('Build (dotnet test)') {
+//        sh 'echo "Testing dotnet app"'
+//        sh 'dotnet test TestNinja.sln /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="coverage.opencover.xml"'
+//        }
     stage('Build Docker image') {
         
-                dockerImage = docker.build('pforsthoff/testninja:$BUILD_NUMBER')
+               sh'docker run -d -v /var/test:/build pforsthoff/testninja'
             
     }
 //     stage ('Docker push') {
