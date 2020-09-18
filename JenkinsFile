@@ -17,7 +17,7 @@ node {
     stage('Build Docker image') {
         
 			    docker.image('pforsthoff/testninja').withRun("-v /var/lib/jenkins/workspace/TestNinjaPipeline:/build"){ c ->
-			sh "docker build ."
+			//sh "docker build ."
 		}
 
             
