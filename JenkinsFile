@@ -18,7 +18,7 @@ node {
         
 			//docker.image('sdk:3.1').withRun("-v /var/lib/jenkins/workspace/TestNinjaPipeline:/build"){ c ->
             sh 'docker build -t dotnet-builder .'
-			sh "docker run -it -v C:\K8s_Workspace\dockertest\DockerInOut\TestNinja\:/testninja dotnet-builder /bin/bash -c "chmod -R 777 ./; rm -rfv bin; rm -rfv obj; dotnet clean; dotnet restore; dotnet publish 'TestNinja.csproj' -c Release -r linux-musl-x64 -o /app; cp -R /app ./res" dotnet-builder"
+			sh 'docker run -it -v C:\K8s_Workspace\dockertest\DockerInOut\TestNinja\:/testninja dotnet-builder /bin/bash -c "chmod -R 777 ./; rm -rfv bin; rm -rfv obj; dotnet clean; dotnet restore; dotnet publish TestNinja.csproj -c Release -r linux-musl-x64 -o /app; cp -R /app ./res" dotnet-builder'
 		}
 
             
