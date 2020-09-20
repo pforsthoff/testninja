@@ -6,18 +6,19 @@ node {
             branch: 'master'
             )
     }
-    stage('Build (dotnet build)') {
-        sh 'echo "Building dotnet app"'
-        sh 'dotnet build'
-        }
+//    stage('Build (dotnet build)') {
+//        sh 'echo "Building dotnet app"'
+//        sh 'dotnet build'
+//        }
 //    stage('Build (dotnet test)') {
 //        sh 'echo "Testing dotnet app"'
 //        sh 'dotnet test TestNinja.sln /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="coverage.opencover.xml"'
 //        }
     stage('Build Docker image') {
         
-			    docker.image('pforsthoff/testninja').withRun("-v /var/lib/jenkins/workspace/TestNinjaPipeline:/build"){ c ->
-			//sh "docker build ."
+			//docker.image('sdk:3.1').withRun("-v /var/lib/jenkins/workspace/TestNinjaPipeline:/build"){ c ->
+            sh 'docker build -t dotnet-builder .'
+			sh "docker run -it -v C:\K8s_Workspace\dockertest\DockerInOut\TestNinja\:/testninja dotnet-builder /bin/bash -c "chmod -R 777 ./; rm -rfv bin; rm -rfv obj; dotnet clean; dotnet restore; dotnet publish 'TestNinja.csproj' -c Release -r linux-musl-x64 -o /app; cp -R /app ./res" dotnet-builder"
 		}
 
             
@@ -35,11 +36,11 @@ node {
 //      
 //    }
 
-stage('Apply Kubernetes files') {
-    withKubeConfig([credentialsId: 'jenkins-deployer-credentials', serverUrl: 'https://192.168.1.221:6443']) {
-      sh 'kubectl apply -f testninja-deployment.yaml'
-      sh 'kubectl config view'
-    }
-  }
+//stage('Apply Kubernetes files') {
+//    withKubeConfig([credentialsId: 'jenkins-deployer-credentials', serverUrl: 'https://192.168.1.221:6443']) {
+//      sh 'kubectl apply -f testninja-deployment.yaml'
+//      sh 'kubectl config view'
+//    }
+// }
 
 }
