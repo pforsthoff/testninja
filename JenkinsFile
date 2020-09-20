@@ -14,15 +14,10 @@ node {
 //        sh 'echo "Testing dotnet app"'
 //        sh 'dotnet test TestNinja.sln /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="coverage.opencover.xml"'
 //        }
-    stage('Build Docker image') {
-        
-			//docker.image('sdk:3.1').withRun("-v /var/lib/jenkins/workspace/TestNinjaPipeline:/build"){ c ->
-            sh 'docker build -t dotnet-builder .'
-			sh 'docker run -it -v ${pwd}/:/testninja dotnet-builder /bin/bash -c "chmod -R 777 ./; rm -rfv bin; rm -rfv obj; dotnet clean; dotnet restore; dotnet publish TestNinja.csproj -c Release -r linux-musl-x64 -o /app; cp -R /app ./res" dotnet-builder'
-		}
-
-            
-    }
+     stage('docker') {
+        sh 'docker build -t dotnet-builder .'
+	    sh 'docker run -v ${pwd}/:/var/lib/jenkins/workspace/TestNinjaPipeline/TestNinja dotnet-builder /bin/bash -c "dotnet clean; dotnet restore; dotnet publish TestNinja.csproj -c Release -r linux-musl-x64 -o /app; cp -R /app ./res" dotnet-builder'
+     }
 //     stage ('Docker push') {
 //        withCredentials([usernamePassword( credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
 //            docker.withRegistry('', 'dockerhub') {
