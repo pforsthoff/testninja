@@ -24,6 +24,11 @@
     <PackageReference Include="System.IO.FileSystem" Version="4.3.0" />
     <PackageReference Include="System.Net.NameResolution" Version="4.3.0" />
     <PackageReference Include="System.Runtime.InteropServices" Version="4.3.0" />
+    <PackageReference Include="Twitter.Bootstrap.Bootswatch.Spacelab" Version="3.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
 </Project>
