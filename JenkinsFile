@@ -15,9 +15,11 @@ node {
 //        sh 'dotnet test TestNinja.sln /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="coverage.opencover.xml"'
 //        }
      stage('docker') {
-        sh 'docker build -t dotnet-builder .'
-	    sh 'docker run -v $(pwd)/TestNinja:/testninja dotnet-builder /bin/bash -c "dotnet restore; dotnet publish TestNinja.csproj -c Release -r linux-musl-x64 -o /app; cp -R /app /testninja/build"'
-        sh 'docker build -f Dockerfile.builder .'
+        docker.withServer('tcp://100.100.118.10:2375') {
+            sh 'docker build -t dotnet-builder .'
+	        sh 'docker run -v $(pwd)/TestNinja:/testninja dotnet-builder /bin/bash -c "dotnet restore; dotnet publish TestNinja.csproj -c Release -r linux-musl-x64 -o /app; cp -R /app /testninja/build"'
+            sh 'docker build -f Dockerfile.builder .'
+        }
      }
 //     stage ('Docker push') {
 //        withCredentials([usernamePassword( credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
