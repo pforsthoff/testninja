@@ -40,8 +40,11 @@ node {
 // }
 stage('docker') {
         docker.withServer('tcp://100.100.118.10:2375') {
-            docker.image('tcribbet/centosdev').withRun(args: "-v /tmp:/tmp", command: "ls -la /tmp") {
-            sh 'ls'
+            def c = docker.image(pforsthoff/centosdev).run('-v /tmp:/tmp', 'ls -la /tmp')
+            try {
+              sh 'gcc --version'
+            } finally {
+              c.stop()
             }
         }
      }
