@@ -40,10 +40,9 @@ node {
 // }
 stage('docker') {
         docker.withServer('tcp://100.100.118.10:2375') {
-            docker.image('tcribbet/centosdev').inside('') {
-            sh 'gcc --version'
+            docker.image('tcribbet/centosdev').withRun('command: "gcc --version"') {
             sh 'ls'
-        }
+            }
         }
      }
 }
