@@ -41,7 +41,7 @@ node {
 stage('docker') {
         docker.withServer('tcp://100.100.118.10:2375') {
             docker.image('tcribbet/centosdev').withRun('') {
-            sh 'cd dev/scripts/'
+            sh 'gcc --version'
             sh 'ls'
         }
         }
