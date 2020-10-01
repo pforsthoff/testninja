@@ -38,15 +38,11 @@ node {
 //      sh 'kubectl config view'
 //    }
 // }
-stage('docker') {
-        docker.withServer('tcp://100.100.118.10:2375') {
-            docker.image('tcribbet/centosdev').withRun('') {
-                docker.image('tcribbet/centosdev').inside {
-                 sh 'gcc --version'
-                 sh 'ls'
-                }
-           
+    stage('docker') {
+            docker.withServer('tcp://100.100.118.10:2375') {
+            
+            sh 'docker build -f Docker.nnc-executor -t comcept.ncct.nnc:5.3.0.1 .'
+                
             }
-        }
-     }
+    }
 }
