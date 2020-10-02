@@ -17,7 +17,7 @@ RUN dotnet sonarscanner begin \
   /d:sonar.login="$SONAR_TOKEN" \
   /d:sonar.verbose=true \
   /d:sonar.cs.opencover.reportsPaths=Tests/TestNinja.UnitTests/Tests/TestNinja.UnitTests/coverage.opencover.xml \
-  /d:sonar.coverage.exclusions="**Tests*.cs,**/wwwroot/**"
+  /d:sonar.coverage.exclusions="**Tests*.cs,**/wwwroot/**" \
   /d:sonar.cs.opencover.reportsPaths=/coverage.opencover.xml
 RUN dotnet restore "TestNinja.csproj" -r linux-musl-x64
 RUN dotnet build
