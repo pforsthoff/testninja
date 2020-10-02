@@ -22,7 +22,8 @@ node {
 //        sh 'dotnet test TestNinja.sln /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="coverage.opencover.xml"'
 //    }
     stage('SonarQube Code Analysis and Coverage') {
-		    
+				
+				sh 'dotnet tool install --global dotnet-sonarscanner'
 		        sh 'dotnet sonarscanner begin /k:"TestNinja2" /d:sonar.host.url="http://10.0.0.102" ' +
 		        '/d:sonar.login="bcc7cc1368ef83a470e72ab5e8396f8e5d243011" /d:sonar.verbose=true ' +
 		        '/d:sonar.cs.opencover.reportsPaths=Tests/TestNinja.UnitTests/Tests/TestNinja.UnitTests/coverage.opencover.xml ' +
