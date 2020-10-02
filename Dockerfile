@@ -5,7 +5,7 @@ WORKDIR /src
 COPY ["TestNinja/TestNinja.csproj", "."]
 RUN dotnet restore "TestNinja.csproj" -r linux-musl-x64
 COPY . .
-RUN dotnet build "TestNinja.csproj" -c Release -r linux-musl-x64 -o /app
+#RUN dotnet build "TestNinja.csproj" -c Release -r linux-musl-x64 -o /app
 RUN dotnet test TestNinja.sln /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="coverage.opencover.xml"
 FROM build AS publish
 RUN dotnet publish "TestNinja.csproj" -c Release -r linux-musl-x64 -o /app
