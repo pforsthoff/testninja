@@ -8,24 +8,29 @@ node {
     }
     stage('Build (dotnet build)') {
         sh 'echo "Building dotnet app"'
-        sh 'dotnet build'
+        sh 'docker build pforsthoff/testninja .'
     }
-    stage('Build (dotnet test)') {
-        sh 'echo "Testing dotnet app"'
-        sh 'dotnet test TestNinja.sln /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="coverage.opencover.xml"'
-    }
-    stage('SonarQube Code Analysis and Coverage') {
-		    steps {
-		        sh 'dotnet sonarscanner begin /k:"TestNinja2" /d:sonar.host.url="http://10.0.0.102" ' +
-		        '/d:sonar.login="bcc7cc1368ef83a470e72ab5e8396f8e5d243011" /d:sonar.verbose=true ' +
-		        '/d:sonar.cs.opencover.reportsPaths=Tests/TestNinja.UnitTests/Tests/TestNinja.UnitTests/coverage.opencover.xml ' +
-		        '/d:sonar.coverage.exclusions="**Tests*.cs,**/wwwroot/**"'
-		        sh 'dotnet build'
-		        sh 'dotnet test Tests/TestNinja.UnitTests/TestNinja.UnitTests.csproj ' +
-		            '/p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="Tests/TestNinja.UnitTests/coverage.opencover.xml"'
-		        sh 'dotnet sonarscanner end /d:sonar.login="6b8e1356fda8e59d6fce77730be13c7d3f6245e3"'
-		    }
-		}
+
+//    stage('Build (dotnet build)') {
+//        sh 'echo "Building dotnet app"'
+//        sh 'dotnet build'
+//    }
+//    stage('Build (dotnet test)') {
+//        sh 'echo "Testing dotnet app"'
+//        sh 'dotnet test TestNinja.sln /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="coverage.opencover.xml"'
+//    }
+//    stage('SonarQube Code Analysis and Coverage') {
+//		    steps {
+//		        sh 'dotnet sonarscanner begin /k:"TestNinja2" /d:sonar.host.url="http://10.0.0.102" ' +
+//		        '/d:sonar.login="bcc7cc1368ef83a470e72ab5e8396f8e5d243011" /d:sonar.verbose=true ' +
+//		        '/d:sonar.cs.opencover.reportsPaths=Tests/TestNinja.UnitTests/Tests/TestNinja.UnitTests/coverage.opencover.xml ' +
+//		        '/d:sonar.coverage.exclusions="**Tests*.cs,**/wwwroot/**"'
+//		        sh 'dotnet build'
+//		        sh 'dotnet test Tests/TestNinja.UnitTests/TestNinja.UnitTests.csproj ' +
+//		            '/p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="Tests/TestNinja.UnitTests/coverage.opencover.xml"'
+//		        sh 'dotnet sonarscanner end /d:sonar.login="6b8e1356fda8e59d6fce77730be13c7d3f6245e3"'
+//		    }
+//		}
 //     stage('docker') {
 //        sh 'docker build -t dotnet-builder .'
 //	    sh 'docker run -v $(pwd)/TestNinja:/testninja dotnet-builder /bin/bash -c "dotnet restore; dotnet publish TestNinja.csproj -c Release -r linux-musl-x64 -o /app; cp -R /app /testninja/build"'
