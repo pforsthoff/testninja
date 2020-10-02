@@ -1,6 +1,4 @@
 FROM tcribbet/centosdev:latest
-RUN echo minion workspace dir files...
-RUN ls
 RUN gcc --version
 SHELL ["usr/bin/scl", "enable", "devtoolset-7"]
 RUN gcc --version
