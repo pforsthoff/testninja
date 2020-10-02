@@ -16,9 +16,12 @@ RUN dotnet sonarscanner begin \
   /d:sonar.host.url="$SONAR_HOST_URL" \
   /d:sonar.login="$SONAR_TOKEN" \
   /d:sonar.verbose=true \
+  /d:sonar.cs.opencover.reportsPaths=Tests/TestNinja.UnitTests/Tests/TestNinja.UnitTests/coverage.opencover.xml
+  /d:sonar.coverage.exclusions="**Tests*.cs,**/wwwroot/**"
   /d:sonar.cs.opencover.reportsPaths=/coverage.opencover.xml
 RUN dotnet restore "TestNinja.csproj" -r linux-musl-x64
-RUN dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="coverage.opencover.xml"
+RUN dotnet build
+RUN dotnet test Tests/TestNinja.UnitTests/TestNinja.UnitTests.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="Tests/TestNinja.UnitTests/coverage.opencover.xml"
 RUN dotnet sonarscanner end /d:sonar.login="$SONAR_TOKEN"
 COPY . .
 #RUN dotnet build "TestNinja.csproj" -c Release -r linux-musl-x64 -o /app
