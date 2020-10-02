@@ -1,5 +1,6 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR testninja
+RUN ls
 RUN dotnet --version
 RUN dotnet restore
 RUN dotnet build 
