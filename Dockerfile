@@ -6,7 +6,7 @@ ARG SONAR_OGRANIZAION_KEY=test
 ARG SONAR_HOST_URL=http://10.0.0.102:9000/sonar
 ARG SONAR_TOKEN=a5347b5331137238bd1295a34f309e4d757876d6
 WORKDIR /src
-RUN export PATH="$PATH:/root/.dotnet/tools"
+ENV PATH="${PATH}:/root/.dotnet/tools"
 RUN dotnet tool install --global dotnet-sonarscanner
 RUN dotnet tool install --global coverlet.console
 COPY ["TestNinja/TestNinja.csproj", "."]
