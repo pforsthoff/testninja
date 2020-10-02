@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS base
 WORKDIR /app
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
-ARG SONAR_PROJECT_KEY=TestNinja
+ARG SONAR_PROJECT_KEY=testninja
 ARG SONAR_OGRANIZAION_KEY=''
 ARG SONAR_HOST_URL=http://10.0.0.102/
 ARG SONAR_TOKEN=0d5fbec78fabe1219adb7f916f008d70073373d6
@@ -20,7 +20,7 @@ RUN dotnet sonarscanner begin \
   /d:sonar.coverage.exclusions="**Tests*.cs,**/wwwroot/**" 
 RUN dotnet restore "TestNinja.csproj" -r linux-musl-x64
 RUN dotnet build
-RUN dotnet test Tests/TestNinja.UnitTests/TestNinja.UnitTests.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="Tests/TestNinja.UnitTests/coverage.opencover.xml"
+RUN dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="coverage.opencover.xml"
 RUN dotnet sonarscanner end /d:sonar.login="$SONAR_TOKEN"
 COPY . .
 #RUN dotnet build "TestNinja.csproj" -c Release -r linux-musl-x64 -o /app
