@@ -8,7 +8,9 @@ node {
     }
     stage('Build (dotnet build)') {
         sh 'echo "Building dotnet app"'
+        docker.withServer('tcp://100.100.118.10:2375') {
         sh 'docker build -t pforsthoff/testninja .'
+        }
     }
 
 //    stage('Build (dotnet build)') {
