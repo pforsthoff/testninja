@@ -10,8 +10,6 @@ ENV PATH="${PATH}:/root/.dotnet/tools"
 RUN dotnet tool install --global dotnet-sonarscanner
 RUN dotnet tool install --global coverlet.console
 COPY ["TestNinja/TestNinja.csproj", "."]
-RUN dotnet restore "TestNinja.csproj" -r linux-musl-x64
-RUN dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="coverage.opencover.xml"
 RUN dotnet sonarscanner begin \
   /k:"$SONAR_PROJECT_KEY" \
   /o:"$SONAR_OGRANIZAION_KEY" \
@@ -19,6 +17,8 @@ RUN dotnet sonarscanner begin \
   /d:sonar.login="$SONAR_TOKEN" \
   /d:sonar.verbose=true \
   /d:sonar.cs.opencover.reportsPaths=/coverage.opencover.xml
+RUN dotnet restore "TestNinja.csproj" -r linux-musl-x64
+RUN dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="coverage.opencover.xml"
 RUN dotnet sonarscanner end /d:sonar.login="$SONAR_TOKEN"
 COPY . .
 #RUN dotnet build "TestNinja.csproj" -c Release -r linux-musl-x64 -o /app
