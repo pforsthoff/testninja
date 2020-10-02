@@ -8,7 +8,7 @@ node {
     }
     stage('Build (dotnet build)') {
         sh 'echo "Building dotnet app"'
-        sh 'docker build pforsthoff/testninja .'
+        sh 'docker build -t pforsthoff/testninja .'
     }
 
 //    stage('Build (dotnet build)') {
