@@ -6,20 +6,19 @@ ARG SONAR_OGRANIZAION_KEY=''
 ARG SONAR_HOST_URL=http://10.0.0.102/
 ARG SONAR_TOKEN=0d5fbec78fabe1219adb7f916f008d70073373d6
 WORKDIR /src
-RUN set -x \
+ENV JAVA_VER 8
+ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 
-&& apt-get update \
-
-&& apt-get install -y \
-
-openjdk-8-jdk \
-
-ca-certificates-java \
-
-&& rm -rf /var/lib/apt/lists/* \
-
-&& [ "$JAVA_HOME" = "$(docker-java-home)" ]
-
+RUN echo 'deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main' >> /etc/apt/sources.list && \
+    echo 'deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main' >> /etc/apt/sources.list && \
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C2518248EEA14886 && \
+    apt-get update && \
+    echo oracle-java${JAVA_VER}-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections && \
+    apt-get install -y --force-yes --no-install-recommends oracle-java${JAVA_VER}-installer oracle-java${JAVA_VER}-set-default && \
+    apt-get clean && \
+    rm -rf /var/cache/oracle-jdk${JAVA_VER}-installer
+RUN update-java-alternatives -s java-8-oracle
+RUN echo "export JAVA_HOME=/usr/lib/jvm/java-8-oracle" >> ~/.bashrc
 ENV PATH="${PATH}:/root/.dotnet/tools"
 RUN dotnet tool install --global dotnet-sonarscanner
 RUN dotnet tool install --global coverlet.console
