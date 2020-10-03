@@ -6,27 +6,12 @@ ARG SONAR_OGRANIZAION_KEY=''
 ARG SONAR_HOST_URL=http://10.0.0.102/
 ARG SONAR_TOKEN=0d5fbec78fabe1219adb7f916f008d70073373d6
 WORKDIR /src
-RUN apt-get update
-# To solve add-apt-repository : command not found
-RUN apt-get -y install software-properties-common
 
-# Install Java
-RUN \
-  echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
-  add-apt-repository -y ppa:webupd8team/java && \
-  apt-get update && \
-  apt-get install -y oracle-java8-installer --allow-unauthenticated && \
-  rm -rf /var/lib/apt/lists/* && \
-  rm -rf /var/cache/oracle-jdk8-installer
-
-
-# Define commonly used JAVA_HOME variable
-ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
-ENV PATH="${PATH}:/root/.dotnet/tools"
+RUN apt-get update && apt-get install -y openjdk-11-jdk
 RUN dotnet tool install --global dotnet-sonarscanner
 RUN dotnet tool install --global coverlet.console
-ENV JAVA_HOME=/usr/local/openjdk-8/bin
-ENV PATH="$PATH:$JAVA_HOME/bin"  
+ENV PATH="${PATH}:/root/.dotnet/tools"
+
 COPY ["TestNinja/TestNinja.csproj", "."]
 RUN dotnet sonarscanner begin \
   /k:"$SONAR_PROJECT_KEY" \
