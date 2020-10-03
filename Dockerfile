@@ -6,13 +6,19 @@ ARG SONAR_OGRANIZAION_KEY=''
 ARG SONAR_HOST_URL=http://10.0.0.102/
 ARG SONAR_TOKEN=0d5fbec78fabe1219adb7f916f008d70073373d6
 WORKDIR /src
-USER root
-# Install Java runtime
-RUN microdnf --enablerepo=rhel-7-server-rpms \
-install java-1.8.0-openjdk --nodocs ;\
-microdnf clean all
-# Set the JAVA_HOME variable to make it clear where Java is located
-ENV JAVA_HOME /etc/alternatives/jre
+RUN set -x \
+
+&& apt-get update \
+
+&& apt-get install -y \
+
+openjdk-8-jdk \
+
+ca-certificates-java \
+
+&& rm -rf /var/lib/apt/lists/* \
+
+&& [ "$JAVA_HOME" = "$(docker-java-home)" ]
 
 ENV PATH="${PATH}:/root/.dotnet/tools"
 RUN dotnet tool install --global dotnet-sonarscanner
