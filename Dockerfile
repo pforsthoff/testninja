@@ -11,8 +11,7 @@ RUN apt-get update && apt-get install -y \
     software-properties-common
 
 # Add the "JAVA" ppa
-RUN add-apt-repository -y \
-    ppa:webupd8team/java
+RUN apt-add-repository -y -r ppa:armagetronad-dev/ppa
 # Install OpenJDK-8
 RUN apt-get update && \
     apt-get install -y openjdk-8-jdk && \
