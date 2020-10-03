@@ -6,6 +6,12 @@ ARG SONAR_OGRANIZAION_KEY=''
 ARG SONAR_HOST_URL=http://10.0.0.102/
 ARG SONAR_TOKEN=0d5fbec78fabe1219adb7f916f008d70073373d6
 WORKDIR /src
+RUN echo "deb http://archive.ubuntu.com/ubuntu trusty main universe" > /etc/apt/sources.list
+
+RUN apt-get -y update
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q python-software-properties software-properties-common
+
 ENV JAVA_VER 8
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 
@@ -17,8 +23,11 @@ RUN echo 'deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main' >> /
     apt-get install -y --force-yes --no-install-recommends oracle-java${JAVA_VER}-installer oracle-java${JAVA_VER}-set-default && \
     apt-get clean && \
     rm -rf /var/cache/oracle-jdk${JAVA_VER}-installer
+
 RUN update-java-alternatives -s java-8-oracle
+
 RUN echo "export JAVA_HOME=/usr/lib/jvm/java-8-oracle" >> ~/.bashrc
+
 ENV PATH="${PATH}:/root/.dotnet/tools"
 RUN dotnet tool install --global dotnet-sonarscanner
 RUN dotnet tool install --global coverlet.console
