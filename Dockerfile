@@ -9,7 +9,7 @@ WORKDIR /src
 ENV PATH="${PATH}:/root/.dotnet/tools"
 RUN dotnet tool install --global dotnet-sonarscanner
 RUN dotnet tool install --global coverlet.console
-ENV JAVA_HOME=/usr/local/openjdk-8
+ENV JAVA_HOME=/usr/local/openjdk-8/bin
 ENV PATH="$PATH:$JAVA_HOME/bin"  
 COPY ["TestNinja/TestNinja.csproj", "."]
 RUN dotnet sonarscanner begin \
