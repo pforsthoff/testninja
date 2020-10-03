@@ -6,6 +6,7 @@ ARG SONAR_OGRANIZAION_KEY=''
 ARG SONAR_HOST_URL=http://10.0.0.102/
 ARG SONAR_TOKEN=0d5fbec78fabe1219adb7f916f008d70073373d6
 WORKDIR /src
+RUN apt-get update
 # To solve add-apt-repository : command not found
 RUN apt-get -y install software-properties-common
 
