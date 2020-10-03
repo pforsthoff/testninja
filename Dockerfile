@@ -7,10 +7,10 @@ ARG SONAR_HOST_URL=http://10.0.0.102/
 ARG SONAR_TOKEN=0d5fbec78fabe1219adb7f916f008d70073373d6
 WORKDIR /src
 ENV PATH="${PATH}:/root/.dotnet/tools"
-ENV JAVA_HOME=/usr/local/openjdk-8
-ENV PATH="$JAVA_HOME/bin:${PATH}"  
 RUN dotnet tool install --global dotnet-sonarscanner
 RUN dotnet tool install --global coverlet.console
+ENV JAVA_HOME=/usr/local/openjdk-8
+ENV PATH="$PATH:$JAVA_HOME/bin"  
 COPY ["TestNinja/TestNinja.csproj", "."]
 RUN dotnet sonarscanner begin \
   /k:"$SONAR_PROJECT_KEY" \
