@@ -29,7 +29,7 @@ COPY . .
 #RUN dotnet build "TestNinja.csproj" -c Release -r linux-musl-x64 -o /app
 FROM build AS publish
 RUN dotnet publish "TestNinja.csproj" -c Release -o /app
-RUN rm -r /app/cs /app/de /app/es /app/fr /app/it /app/ja /app/ko /app/pl /app/pt-BR /app/ru /app/tr /app/zh-Hans /app/zh-Hant
+#RUN rm -r /app/cs /app/de /app/es /app/fr /app/it /app/ja /app/ko /app/pl /app/pt-BR /app/ru /app/tr /app/zh-Hans /app/zh-Hant
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
