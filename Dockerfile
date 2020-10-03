@@ -6,6 +6,13 @@ ARG SONAR_OGRANIZAION_KEY=''
 ARG SONAR_HOST_URL=http://10.0.0.102/
 ARG SONAR_TOKEN=0d5fbec78fabe1219adb7f916f008d70073373d6
 WORKDIR /src
+# Install "software-properties-common" (for the "add-apt-repository")
+RUN apt-get update && apt-get install -y \
+    software-properties-common
+
+# Add the "JAVA" ppa
+RUN add-apt-repository -y \
+    ppa:webupd8team/java
 # Install OpenJDK-8
 RUN apt-get update && \
     apt-get install -y openjdk-8-jdk && \
