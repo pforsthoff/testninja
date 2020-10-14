@@ -8,13 +8,12 @@
     ".NETCoreApp,Version=v3.1": {
       "TestNinja.UnitTests/1.0.0": {
         "dependencies": {
-          "FluentAssertions": "5.10.3",
           "Microsoft.NET.Test.Sdk": "16.6.1",
           "Moq": "4.14.5",
           "NUnit": "3.12.0",
           "NUnit3TestAdapter": "4.0.0-alpha.1",
+          "ReportGenerator": "4.7.1",
           "TestNinja": "1.0.0",
-          "coverlet.collector": "1.3.0",
           "coverlet.msbuild": "2.9.0"
         },
         "runtime": {
@@ -41,7 +40,6 @@
           }
         }
       },
-      "coverlet.collector/1.3.0": {},
       "coverlet.msbuild/2.9.0": {},
       "EntityFramework/6.4.4": {
         "dependencies": {
@@ -59,17 +57,6 @@
           "lib/netstandard2.1/EntityFramework.dll": {
             "assemblyVersion": "6.0.0.0",
             "fileVersion": "6.400.420.21404"
-          }
-        }
-      },
-      "FluentAssertions/5.10.3": {
-        "dependencies": {
-          "System.Configuration.ConfigurationManager": "4.7.0"
-        },
-        "runtime": {
-          "lib/netcoreapp2.1/FluentAssertions.dll": {
-            "assemblyVersion": "5.10.3.0",
-            "fileVersion": "5.10.3.0"
           }
         }
       },
@@ -647,6 +634,7 @@
           "System.Xml.XmlDocument": "4.3.0"
         }
       },
+      "ReportGenerator/4.7.1": {},
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {},
       "runtime.fedora.23-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {},
       "runtime.fedora.24-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {},
@@ -1632,13 +1620,6 @@
       "path": "castle.core/4.4.0",
       "hashPath": "castle.core.4.4.0.nupkg.sha512"
     },
-    "coverlet.collector/1.3.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-t8pnf5SX2ya0RX4vjoxsbhDMQCZJcpPun2neHKJ4FouMmObylo25FvoOydvf3Bl+l+IzWw7u2vjEeCBHnleB9g==",
-      "path": "coverlet.collector/1.3.0",
-      "hashPath": "coverlet.collector.1.3.0.nupkg.sha512"
-    },
     "coverlet.msbuild/2.9.0": {
       "type": "package",
       "serviceable": true,
@@ -1652,13 +1633,6 @@
       "sha512": "sha512-yj1+/4tci7Panu3jKDHYizxwVm0Jvm7b7m057b5h4u8NUHGCR8WIWirBTw+8EptRffwftIWPBeIRGNKD1ewEMQ==",
       "path": "entityframework/6.4.4",
       "hashPath": "entityframework.6.4.4.nupkg.sha512"
-    },
-    "FluentAssertions/5.10.3": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-gVPEVp1hLVqcv+7Q2wiDf7kqCNn7+bQcQ0jbJ2mcRT6CeRoZl1tNkqvzSIhvekyldDptk77j1b03MXTTRIqqpg==",
-      "path": "fluentassertions/5.10.3",
-      "hashPath": "fluentassertions.5.10.3.nupkg.sha512"
     },
     "log4net/2.0.10": {
       "type": "package",
@@ -1974,6 +1948,13 @@
       "sha512": "sha512-8/nJstVYMZHqIv6eMCY+00j7Wo4mKI1cSK9e1YhCAHiQSIXkQWAdyKBKdu4EZgGI6hx41a+Bk1+iRFjj7DkpDQ==",
       "path": "nunit3testadapter/4.0.0-alpha.1",
       "hashPath": "nunit3testadapter.4.0.0-alpha.1.nupkg.sha512"
+    },
+    "ReportGenerator/4.7.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-vEq6FUDjP2wEK1xypxxhp+cH8SjARaWVVuS628bpFUxdN6V4p38xzpdHT1MHBkE3LOLPCwWf+0aoGttZGtTpfA==",
+      "path": "reportgenerator/4.7.1",
+      "hashPath": "reportgenerator.4.7.1.nupkg.sha512"
     },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {
       "type": "package",

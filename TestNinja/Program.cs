@@ -1,3 +1,4 @@
+using System.Net;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -20,8 +21,8 @@ namespace TestNinja
                     {
                         c.AddJsonFile("config/appsettings.json", optional: true, reloadOnChange: true);
                     });
-                    webBuilder.AddCloudFoundry();
                     webBuilder.UseStartup<Startup>();
+                    var client = new WebClient();
                 });
     }
 }
