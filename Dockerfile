@@ -3,8 +3,8 @@ WORKDIR /app
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 ARG SONAR_PROJECT_KEY=testninja
 ARG SONAR_ORGANIZAION_KEY=''
-ARG SONAR_HOST_URL=http://10.0.0.102/
-ARG SONAR_TOKEN=0d5fbec78fabe1219adb7f916f008d70073373d6
+ARG SONAR_HOST_URL=http://192.168.1.8/
+ARG SONAR_TOKEN=0a2fd59fc7fd179b3a6b320ab64b4f6754d1e635
 WORKDIR /src
 
 RUN apt-get update && apt-get install -y openjdk-11-jdk
