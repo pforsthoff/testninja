@@ -31,7 +31,7 @@ node {
 		        sh 'dotnet build'
 		        sh 'dotnet test Tests/TestNinja.UnitTests/TestNinja.UnitTests.csproj ' +
 		            '/p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="Tests/TestNinja.UnitTests/coverage.opencover.xml"'
-		        sh 'dotnet sonarscanner end'
+		        sh 'dotnet sonarscanner end /d:sonar.login="d88d927e17b79a3d7be06221668dc24ae9f15ade"'
 		    
 		}
 //     stage('docker') {
