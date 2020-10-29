@@ -54,10 +54,11 @@ node {
             dockerImage.push()
             }
         }
+    }
     stage('Apply Kubernetes files') {
     withKubeConfig([credentialsId: 'jenkins-deployer-credentials', serverUrl: 'https://192.168.1.218:6443']) {
       sh 'kubectl apply -f testninja-deployment.yaml'
       sh 'kubectl config view'
     }
- }
+}
 }
