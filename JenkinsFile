@@ -1,12 +1,6 @@
 // Scripted Pipeline with stages
 node {
- withEnv(['value=World']) {
-    stage('Source') { // Get code
-        git( 
-            url: 'https://github.com/pforsthoff/testninja.git/', 
-            branch: 'master'
-            )
-    }
+ 
 //   stage('Build (dotnet build)') {
 //       sh 'echo "Building dotnet app"'
 //       docker.withServer('tcp://100.97.236.141:2375') {
