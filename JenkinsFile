@@ -1,5 +1,6 @@
 // Scripted Pipeline with stages
 node {
+ withEnv(['value=World']) {
     stage('Source') { // Get code
         git( 
             url: 'https://github.com/pforsthoff/testninja.git/', 
@@ -13,56 +14,56 @@ node {
 //       }
 //   }
 
-//    stage('Build (dotnet build)') {
-//        sh 'echo "Building dotnet app"'
-//        sh 'dotnet build'
-//    }
+    stage('Build (dotnet build)') {
+        sh 'echo "Building dotnet app"'
+        sh 'dotnet build'
+    }
 //    stage('Build (dotnet test)') {
 //        sh 'echo "Testing dotnet app"'
 //        sh 'dotnet test TestNinja.sln /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="coverage.opencover.xml"'
 //    }
-    stage('SonarQube Code Analysis and Coverage') {
+//    stage('SonarQube Code Analysis and Coverage') {
 				
 //				sh 'dotnet tool install --global dotnet-sonarscanner'
-		        sh 'dotnet sonarscanner begin /k:"testninja" /d:sonar.host.url="http://192.168.1.8:9000" ' +
-		        '/d:sonar.login="d88d927e17b79a3d7be06221668dc24ae9f15ade" /d:sonar.verbose=true ' +
-		        '/d:sonar.cs.opencover.reportsPaths=Tests/TestNinja.UnitTests/Tests/TestNinja.UnitTests/coverage.opencover.xml ' +
-		        '/d:sonar.coverage.exclusions="**Tests*.cs,**/wwwroot/**"'
-		        sh 'dotnet build'
-		        sh 'dotnet test Tests/TestNinja.UnitTests/TestNinja.UnitTests.csproj ' +
-		            '/p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="Tests/TestNinja.UnitTests/coverage.opencover.xml"'
-		        sh 'dotnet sonarscanner end /d:sonar.login="d88d927e17b79a3d7be06221668dc24ae9f15ade"'
-		    
-		}
+//		        sh 'dotnet sonarscanner begin /k:"testninja" /d:sonar.host.url="http://192.168.1.8:9000" ' +
+//		        '/d:sonar.login="d88d927e17b79a3d7be06221668dc24ae9f15ade" /d:sonar.verbose=true ' +
+//		        '/d:sonar.cs.opencover.reportsPaths=Tests/TestNinja.UnitTests/Tests/TestNinja.UnitTests/coverage.opencover.xml ' +
+//		        '/d:sonar.coverage.exclusions="**Tests*.cs,**/wwwroot/**"'
+//		        sh 'dotnet build'
+//		        sh 'dotnet test Tests/TestNinja.UnitTests/TestNinja.UnitTests.csproj ' +
+//		            '/p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="Tests/TestNinja.UnitTests/coverage.opencover.xml"'
+//		        sh 'dotnet sonarscanner end /d:sonar.login="d88d927e17b79a3d7be06221668dc24ae9f15ade"'
+//		    
+//		}
 //     stage('docker') {
 //        sh 'docker build -t dotnet-builder .'
 //	    sh 'docker run -v $(pwd)/TestNinja:/testninja dotnet-builder /bin/bash -c "dotnet restore; dotnet publish TestNinja.csproj -c Release -r linux-musl-x64 -o /app; cp -R /app /testninja/build"'
-//       sh 'docker build -f Dockerfile.builder .'
+//        sh 'docker build -f Dockerfile.builder .'
 //     }
-//     stage ('Docker push') {
-//        withCredentials([usernamePassword( credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-//            docker.withRegistry('', 'dockerhub') {
-//            sh "docker login -u ${USERNAME} -p ${PASSWORD}"
-//            dockerImage.push()
-//            }
-//        }
-//
+
 // stage('Deploy App to K8s') {
 //       sh "kubectl apply -f testninja-deployment.yaml"
 //      
 //    }
 
-//stage('Apply Kubernetes files') {
-//    withKubeConfig([credentialsId: 'jenkins-deployer-credentials', serverUrl: 'https://192.168.1.218:6443']) {
-//      sh 'kubectl apply -f testninja-deployment.yaml'
-//      sh 'kubectl config view'
-//    }
-// }
-//    stage('docker') {
-//            docker.withServer('tcp://100.97.236.141:2375') {
-//            sh 'echo master workspace dir files...'
-//            sh 'ls'
-//            sh 'docker build -f Docker.nnc-executor -t comcept.ncct.nnc:5.3.0.1 .'
-//            }
-//    }
+    stage('docker') {
+            docker.withServer('tcp://192.168.1.9:2375') {
+            sh 'echo master workspace dir files...'
+            sh 'ls'
+            sh 'docker build -f Dockerfile.orig -t pforsthoff/testninja .'
+            }
+    }
+    stage ('Docker push') {
+        withCredentials([usernamePassword( credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+            docker.withRegistry('', 'pforsthoff/pforsthoff') {
+            sh "docker login -u ${USERNAME} -p ${PASSWORD}"
+            dockerImage.push()
+            }
+        }
+    stage('Apply Kubernetes files') {
+    withKubeConfig([credentialsId: 'jenkins-deployer-credentials', serverUrl: 'https://192.168.1.218:6443']) {
+      sh 'kubectl apply -f testninja-deployment.yaml'
+      sh 'kubectl config view'
+    }
+ }
 }
