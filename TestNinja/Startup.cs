@@ -4,8 +4,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using log4net;
-using Prometheus;
 
 namespace TestNinja
 {
@@ -28,10 +26,10 @@ namespace TestNinja
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             // Custom Metrics to count requests for each endpoint and the method
-            var counter = Metrics.CreateCounter("peopleapi_path_counter", "Counts requests to the People API endpoints", new CounterConfiguration
-            {
-                LabelNames = new[] { "method", "endpoint" }
-            });
+            //var counter = Metrics.CreateCounter("peopleapi_path_counter", "Counts requests to the People API endpoints", new CounterConfiguration
+            //{
+            //    LabelNames = new[] { "method", "endpoint" }
+            //});
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -40,14 +38,14 @@ namespace TestNinja
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-            app.Use((context, next) =>
-            {
-                counter.WithLabels(context.Request.Method, context.Request.Path).Inc();
-                return next();
-            });
+            //app.Use((context, next) =>
+            //{
+            //    counter.WithLabels(context.Request.Method, context.Request.Path).Inc();
+            //    return next();
+            //});
             // Use the Prometheus middleware
-            app.UseMetricServer();
-            app.UseHttpMetrics();
+            //app.UseMetricServer();
+            //app.UseHttpMetrics();
             app.UseStaticFiles();
 
             app.UseRouting();
