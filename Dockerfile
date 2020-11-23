@@ -1,6 +1,5 @@
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
-RUN cd bin
-RUN /bin/ls
+
 COPY /TestNinja/bin/Release/netcoreapp3.1/. /app
 #RUN dotnet restore "TestNinja.csproj" -r linux-musl-x64
 #COPY . .
