@@ -1,16 +1,9 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS base
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
+COPY /Service/Assembly/bin/Release/netcoreapp3.1/. /app
+#RUN dotnet restore "TestNinja.csproj" -r linux-musl-x64
+#COPY . .
 WORKDIR /app
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
-WORKDIR /src
-COPY ["TestNinja/TestNinja.csproj", "."]
-RUN dotnet restore "TestNinja.csproj" -r linux-musl-x64
-COPY . .
-RUN dotnet build "TestNinja.csproj" -c Release -r linux-musl-x64 -o /app
-FROM build AS publish
-RUN dotnet publish "TestNinja.csproj" -c Release -r linux-musl-x64 -o /app
-RUN rm -r /app/cs /app/de /app/es /app/fr /app/it /app/ja /app/ko /app/pl /app/pt-BR /app/ru /app/tr /app/zh-Hans /app/zh-Hant
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app .
-
+#RUN dotnet build "TestNinja.csproj" -c Release -r linux-musl-x64 -o /app
+#RUN dotnet publish "TestNinja.csproj" -c Release -r linux-musl-x64 -o /app
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
 ENTRYPOINT ["dotnet", "TestNinja.dll"]
