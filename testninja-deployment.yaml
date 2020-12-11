@@ -8,7 +8,7 @@ spec:
   containers:
     - name: testninja-app
       image: pforsthoff/testninja
-  serviceAccount: jenkins
+  serviceAccount: gitlab
 ---
 
 kind: Service
