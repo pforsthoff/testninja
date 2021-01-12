@@ -8,7 +8,8 @@ spec:
   containers:
     - name: testninja-app
       image: pforsthoff/testninja
-  serviceAccount: gitlab
+      
+  serviceAccount: jenkins
 ---
 
 kind: Service
@@ -22,3 +23,4 @@ spec:
     - name: http
       port: 80
       targetPort: 80 # Default port for image
+  type: LoadBalancer
